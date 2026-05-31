@@ -1,6 +1,6 @@
 ---
 name: knowledge-takeback-skill
-description: "将 AI 辅助完成的复杂认知任务转化为可验证、可迁移、可沉淀的理解、学习记录与结构化 knowledge-takeback-skill Artifact。Use when the user invokes /knowledge-takeback-skill, /knowledge-takeback-skill letmesee, /knowledge-takeback-skill letmetry, or asks to review, teach, explain, summarize, backtrace, create learning notes, or produce validated visual artifacts for coding, debugging, paper/report reading, research synthesis, knowledge lookup, note organization, planning, presentations, and meeting records."
+description: "生成可交互 HTML 知识回流页面，并将 AI 辅助完成的复杂认知任务转化为可验证、可迁移、可沉淀的理解、学习记录、结构化 Artifact 与按需生成的页面图片。Use when the user invokes /knowledge-takeback-skill, /knowledge-takeback-skill letmesee, /knowledge-takeback-skill letmetry, or asks to create interactive HTML, generate a learning page, review, teach, explain, summarize, backtrace, create learning notes, produce validated visual artifacts, or generate supporting images for coding, debugging, paper/report reading, research synthesis, knowledge lookup, note organization, planning, presentations, and meeting records."
 ---
 
 ## knowledge-takeback-skill Entry
@@ -15,6 +15,9 @@ Before executing any knowledge-takeback-skill workflow, read `knowledge-takeback
 - evidence verification
 - learner profile storage
 - HTML visualization boundaries
+- interactive HTML page generation
+- image generation from prompt files
+- StepFun / MiniMax image generation provider requirements
 - knowledge-takeback-skill Artifact DSL output and validation
 - learning notes and tracking
 

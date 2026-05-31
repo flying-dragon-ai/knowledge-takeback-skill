@@ -14,6 +14,7 @@
     "bin/",
     "docs/",
     "examples/",
+    "prompts/",
     "references/",
     "scripts/",
     "README.md",
@@ -22,9 +23,10 @@
   ],
   "scripts": {
     "validate": "npm run check",
-    "check": "node --check bin/knowledge-takeback-skill.mjs && node --check scripts/validate-social-deck.mjs && node --check assets/magazine-bg-webgl.js && node --check scripts/validate-knowledge-takeback-skill-artifact.mjs && node scripts/validate-knowledge-takeback-skill-artifact.mjs --self-test",
+    "check": "node --check bin/knowledge-takeback-skill.mjs && node --check scripts/generate-image.mjs && node --check scripts/validate-social-deck.mjs && node --check assets/magazine-bg-webgl.js && node --check scripts/validate-knowledge-takeback-skill-artifact.mjs && node scripts/validate-knowledge-takeback-skill-artifact.mjs --self-test",
     "pack:check": "npm pack --dry-run",
     "publish:dry": "npm publish --dry-run",
+    "image:generate": "node scripts/generate-image.mjs",
     "validate:artifact": "node scripts/validate-knowledge-takeback-skill-artifact.mjs",
     "validate:social-deck": "node scripts/validate-social-deck.mjs"
   },

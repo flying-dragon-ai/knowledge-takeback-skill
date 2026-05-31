@@ -12,6 +12,8 @@ Important entrypoints:
 - `knowledge-takeback-skill/agents/openai.yaml` — standalone knowledge-takeback-skill folder UI metadata.
 - `docs/STRUCTURE.md` — directory contract for maintainers.
 - `bin/knowledge-takeback-skill.mjs` — npm/npx installer entrypoint.
+- `prompts/image-generation/` — image prompt library for generated HTML pages.
+- `scripts/generate-image.mjs` — image generation API client.
 
 ## Fixed Project Direction
 
@@ -21,6 +23,29 @@ knowledge-takeback-skill covers AI-assisted complex cognitive tasks, not only co
 - papers, reports, and research synthesis
 - concept lookup, notes, and knowledge frameworks
 - plans, presentations, and meeting records
+- interactive HTML learning/review pages
+
+## Image Generation
+
+The skill can generate supporting images for interactive HTML output.
+
+Current files:
+
+- `prompts/image-generation/README.md` — prompt folder usage rules.
+- `prompts/image-generation/hero-interactive-html.md` — default hero prompt.
+- `prompts/image-generation/concept-visual.md` — default concept visual prompt.
+- `references/image-generation.md` — StepFun/MiniMax provider policy, size mapping, manifest, and QA rules.
+- `scripts/generate-image.mjs` — StepFun/MiniMax/generic image generation client.
+
+Configuration is supplied through environment variables or ignored local config:
+
+```powershell
+$env:KNOWLEDGE_TAKEBACK_IMAGE_BASE_URL='https://...'
+$env:KNOWLEDGE_TAKEBACK_IMAGE_API_KEY='...'
+$env:KNOWLEDGE_TAKEBACK_IMAGE_MODEL='...'
+```
+
+Never commit API keys, generated runtime images, or local image config.
 
 ## Structured Artifact Integration
 
@@ -53,6 +78,7 @@ These files are retained as optional visual resources for local HTML fragments o
 - Keep generated examples in `examples/`, not at the repository root or inside `knowledge-takeback-skill/`.
 - Keep product and handoff documents in `docs/`, not at the repository root.
 - Generated learner data should be written under the user-selected knowledge-takeback-skill storage root, not hard-coded to the current working directory.
+- Generated page images should be saved under the task output directory or ignored local storage, not under `prompts/`.
 - Local task state and generated learner artifacts are ignored by `.gitignore`.
 - Imported upstream projects belong under `local/imports/`, not at the repository root, and are not published to npm.
 - `package.json` `files` is the source of truth for npm package contents.
@@ -65,6 +91,7 @@ python C:\Users\Administrator\.codex\skills\.system\skill-creator\scripts\quick_
 python C:\Users\Administrator\.codex\skills\.system\skill-creator\scripts\quick_validate.py .\knowledge-takeback-skill
 npm run validate
 npm run pack:check
+node .\scripts\generate-image.mjs --prompt-file .\prompts\image-generation\hero-interactive-html.md --base-url https://example.invalid --dry-run
 node .\scripts\validate-knowledge-takeback-skill-artifact.mjs .\examples\knowledge-takeback-skill-artifact-review.ahtml
 node --check .\scripts\validate-social-deck.mjs
 node --check .\assets\magazine-bg-webgl.js

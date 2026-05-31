@@ -1,11 +1,11 @@
 ---
 name: knowledge-takeback-skill
-description: "将 AI 辅助完成的复杂认知任务转化为可验证、可迁移、可沉淀的理解、学习记录与结构化 knowledge-takeback-skill Artifact。Use when the user invokes /knowledge-takeback-skill, /knowledge-takeback-skill letmesee, /knowledge-takeback-skill letmetry, or asks to review, teach, explain, summarize, backtrace, create learning notes, or produce validated visual artifacts for coding, debugging, paper/report reading, research synthesis, knowledge lookup, note organization, planning, presentations, and meeting records."
+description: "生成可交互 HTML 知识回流页面，并将 AI 辅助完成的复杂认知任务转化为可验证、可迁移、可沉淀的理解、学习记录、结构化 Artifact 与按需生成的页面图片。Use when the user invokes /knowledge-takeback-skill, /knowledge-takeback-skill letmesee, /knowledge-takeback-skill letmetry, or asks to create interactive HTML, generate a learning page, review, teach, explain, summarize, backtrace, create learning notes, produce validated visual artifacts, or generate supporting images for coding, debugging, paper/report reading, research synthesis, knowledge lookup, note organization, planning, presentations, and meeting records."
 ---
 
 ## knowledge-takeback-skill
 
-knowledge-takeback-skill 是 AI 辅助工作的知识回流层：先验证，再教学，把一次完成过程转化成用户能理解、迁移和沉淀的能力。
+knowledge-takeback-skill 是 AI 辅助工作的知识回流层：先验证，再教学，把一次完成过程转化成用户能理解、迁移和沉淀的可交互 HTML 页面、结构化 Artifact 或学习笔记。
 
 ## Core Loop
 
@@ -47,6 +47,8 @@ knowledge-takeback-skill 是 AI 辅助工作的知识回流层：先验证，再
 - log：`{storage_root}/knowledge-takeback-skill-log.md`
 - notes：`{storage_root}/knowledge-takeback-skill-notes/YYYY-MM-DD-[task-slug].md`
 - artifacts：`{storage_root}/knowledge-takeback-skill-artifacts/YYYY-MM-DD-[task-slug].ahtml`
+- html：`{storage_root}/knowledge-takeback-skill-html/YYYY-MM-DD-[task-slug]/index.html`
+- images：`{storage_root}/knowledge-takeback-skill-images/YYYY-MM-DD-[task-slug]/`
 
 不要把学习档案硬编码到 skill 包目录。
 
@@ -121,8 +123,68 @@ knowledge-takeback-skill 是 AI 辅助工作的知识回流层：先验证，再
 |---|---|
 | 短解释或普通复盘 | Markdown |
 | 聊天里压缩展示复杂结构 | 局部 HTML 片段 |
+| 可交付、可打开、可交互的知识回流页面 | 完整 HTML 文件 |
 | 可保存、可验证、可编辑的复杂工件 | knowledge-takeback-skill Artifact DSL |
 | 固定尺寸海报 / 社交图导出 | legacy `assets/` + visual references |
+
+### Interactive HTML Pages
+
+当用户要求“生成可交互 HTML”“做学习页”“做可视化页面”“输出网页”或任务适合沉淀为可打开页面时，生成完整 HTML 文件，而不是只在聊天中贴片段。
+
+规则：
+
+- 保存到 `{storage_root}/knowledge-takeback-skill-html/YYYY-MM-DD-[task-slug]/index.html`，相关图片放同目录 `assets/` 或 `{storage_root}/knowledge-takeback-skill-images/`。
+- 页面必须可直接在浏览器打开；CSS 和 JS 可内联，避免依赖未声明的远程资源。
+- 交互优先服务学习：时间线、证据展开、概念切换、对比卡片、挑战题、掌握度记录、步骤回放。
+- 页面中的事实仍然遵守 Evidence Rules；不能为了视觉效果加入未经验证的断言。
+- 如果生成图片，HTML 使用相对路径引用图片，并保留生成图片的 prompt 和 metadata 以便追溯。
+
+### Image Generation
+
+当交互 HTML 需要首屏主视觉、章节插图、概念视觉、背景图或任务对象图片，且现有素材不足以表达主题时，触发图片生成。
+
+触发规则：
+
+- 用户明确要求“生成图片”“配图”“主视觉”“背景图”“封面图”时必须考虑图片生成。
+- 生成交互 HTML 时，如果图片能显著提升理解或首屏识别度，主动使用图片生成；如果只是装饰，不生成。
+- 不为纯代码 diff、纯命令复盘或没有视觉收益的任务生成图片。
+- 如果 API 未配置或调用失败，继续完成 HTML，用 CSS/结构化组件兜底，并在交付说明中标注图片未生成原因。
+- 用户会把可复用提示词放进 `prompts/image-generation/`；生成页面时先按任务主题、页面位置和文件名匹配提示词，找不到合适文件再用内置兜底提示词或任务内联提示词。
+- 生成封面、hero、showcase、卡片图、侧栏图或移动端 mockup 前，先读 `references/image-generation.md`，按 required flow、provider、usage 尺寸映射和 manifest 规则执行。
+- 生图前必须写 image manifest；不要手写 provider 尺寸，不要把 StepFun `size` 和 MiniMax `aspect_ratio` 混用。
+- StepFun 是默认 provider；MiniMax 是可选补充。支持 `stepfun-cn`、`stepfun-global`、`minimax-cn`、`minimax-global` 和 `openai`/generic base URL。
+- 返回 URL 必须立即下载到本地；HTML 只能引用相对本地路径，避免临时链接失效。
+- 如果生成页面或交付物时生图只是增强项，调用脚本加 `--optional`；API key 缺失时记录原因并继续交付，不让整页失败。
+
+提示词规则：
+
+- 先查 `prompts/image-generation/`；优先使用用户放入该目录的提示词文件，支持 `.md` 和 `.txt`。
+- 按文件名和用途选择：`hero-*`/`cover-*` 用于首屏，`concept-*` 用于概念图，`section-*` 用于章节图，`style-*` 用作风格约束。
+- 内置兜底提示词：`hero-interactive-html.md` 用于首屏主视觉，`concept-visual.md` 用于概念插图。
+- 使用前替换提示词变量，例如 `{{topic}}`、`{{audience}}`、`{{visual_goal}}`、`{{style_constraints}}`。
+- 不把 API key、base_url 或密钥写进提示词文件、HTML、metadata 或 git 可发布文件。
+
+配置和命令：
+
+```bash
+KNOWLEDGE_TAKEBACK_IMAGE_PROVIDER="openai"
+KNOWLEDGE_TAKEBACK_IMAGE_BASE_URL="https://your-image-api.example/v1"
+KNOWLEDGE_TAKEBACK_IMAGE_API_KEY="sk-..."
+KNOWLEDGE_TAKEBACK_IMAGE_MODEL="image-model-name"
+node scripts/generate-image.mjs --provider openai --usage cover --prompt-file prompts/image-generation/hero-interactive-html.md --name task-hero --optional
+```
+
+脚本会读取当前工作目录 `.env`，但已有 shell / CI 环境变量优先；`.env.example` 只放占位值。也可把本地配置放到 ignored 文件：
+
+```text
+local/knowledge-takeback-skill/image-generation.config.json
+```
+
+该脚本默认保存图片和 metadata 到：
+
+```text
+local/knowledge-takeback-skill/generated-images/
+```
 
 ### Local HTML Fragments
 

@@ -1,6 +1,6 @@
 # knowledge-takeback-skill
 
-knowledge-takeback-skill is the npm/npx distribution package for the knowledge-takeback-skill workflow. knowledge-takeback-skill provides knowledge backflow for AI-assisted work: it does not only help an agent finish a task; it turns the completed process into something the user can understand, transfer, and retain. Complex reviews can also become validated knowledge-takeback-skill Artifact DSL documents for evidence chains, timelines, comparisons, challenges, and learning state.
+knowledge-takeback-skill is an npm/npx skill package for generating interactive HTML knowledge-takeback pages. It does not only help an agent finish a task; it turns the completed process into a page, structured artifact, or learning record the user can understand, transfer, and retain. When a page needs a hero image, section illustration, or concept visual, the skill can call an image generation API from prompt files.
 
 ## Scope
 
@@ -10,6 +10,7 @@ knowledge-takeback-skill covers all **AI-assisted complex cognitive tasks**, inc
 - reading papers, reports, and research material
 - looking up concepts, organizing notes, and building knowledge frameworks
 - writing plans, preparing presentations, and consolidating meeting records
+- generating interactive HTML learning pages, knowledge pages, and review pages
 
 ## Usage
 
@@ -48,6 +49,7 @@ knowledge-takeback-skill/
 ├── agents/openai.yaml          # Root UI metadata
 ├── assets/                     # Visual templates/assets retained for optional Vision+ reuse
 ├── bin/                        # npx installer entrypoint
+├── prompts/image-generation/    # Image prompts; users can add their own prompt files
 ├── references/                 # knowledge-takeback-skill Artifact DSL, visual references, and layout rules
 ├── docs/                       # Product, handoff, and structure documentation
 ├── examples/                   # Generated knowledge-takeback-skill HTML / Artifact examples
@@ -64,8 +66,32 @@ See [docs/STRUCTURE.md](docs/STRUCTURE.md) for the directory contract.
 - Separate facts, inferences, and items that still need verification.
 - Preserve evidence anchors: files, original text, command output, conversation context, or explicit reasoning.
 - Store profiles, logs, and notes under the user-selected knowledge-takeback-skill storage root.
-- Use local HTML fragments for complex visual structure when helpful, but never emit a complete page shell.
+- Use interactive HTML as the primary deliverable; generated images must remain traceable through prompt and metadata.
 - Use knowledge-takeback-skill Artifact DSL and run validation when complex visualization should be durable, editable, and verifiable.
+
+## Image Generation
+
+Place custom prompt files in:
+
+```text
+prompts/image-generation/
+```
+
+Provide image API configuration through environment variables or an ignored local config file. Do not commit API keys:
+
+```bash
+KNOWLEDGE_TAKEBACK_IMAGE_BASE_URL="https://..."
+KNOWLEDGE_TAKEBACK_IMAGE_API_KEY="..."
+KNOWLEDGE_TAKEBACK_IMAGE_MODEL="..."
+```
+
+Manual generation example:
+
+```bash
+npm run image:generate -- --provider stepfun-cn --usage cover --prompt-file prompts/image-generation/hero-interactive-html.md --name demo-hero --response-format b64_json
+```
+
+See [references/image-generation.md](references/image-generation.md) for StepFun / MiniMax providers, usage size mapping, and QA rules.
 
 ## Validation
 
@@ -74,6 +100,7 @@ python C:/Users/Administrator/.codex/skills/.system/skill-creator/scripts/quick_
 python C:/Users/Administrator/.codex/skills/.system/skill-creator/scripts/quick_validate.py ./knowledge-takeback-skill
 npm run validate
 npm run pack:check
+node --check scripts/generate-image.mjs
 node scripts/validate-knowledge-takeback-skill-artifact.mjs examples/knowledge-takeback-skill-artifact-review.ahtml
 node --check scripts/validate-social-deck.mjs
 node --check assets/magazine-bg-webgl.js

@@ -9,6 +9,7 @@ This repository is the installable `knowledge-takeback-skill` package for the kn
 - `package.json` / `package-lock.json` — Node metadata and validation scripts.
 - `LICENSE` / `.gitignore` — repository metadata.
 - `bin/knowledge-takeback-skill.mjs` — npx installer entrypoint.
+- `prompts/image-generation/` — user-editable image generation prompt files.
 
 ## Skill Runtime
 
@@ -20,21 +21,24 @@ This repository is the installable `knowledge-takeback-skill` package for the kn
 
 - `assets/` — reusable visual templates, generated backgrounds, and client-side helpers.
 - `bin/` — package CLI files included for npm distribution.
-- `references/` — knowledge-takeback-skill Artifact DSL rules, artifact workflow, and optional visual/layout references.
-- `scripts/` — validators and maintenance scripts, including `validate-knowledge-takeback-skill-artifact.mjs`.
+- `prompts/` — prompt libraries used by the skill, including image generation prompts.
+- `references/` — knowledge-takeback-skill Artifact DSL rules, artifact workflow, image generation provider rules, and optional visual/layout references.
+- `scripts/` — validators and maintenance scripts, including `validate-knowledge-takeback-skill-artifact.mjs` and StepFun/MiniMax-aware `generate-image.mjs`.
 - `docs/` — product, handoff, and maintainer documentation.
 
 ## Generated Material
 
 - `examples/` — checked-in generated HTML and `.ahtml` artifact examples.
 - `local/` — ignored local learner state, scratch artifacts, and imported source drops.
-- `local/`, `knowledge-takeback-skill-notes/`, `knowledge-takeback-skill-artifacts/`, `knowledge-takeback-skill-log.md`, `knowledge-takeback-skill-config.md`, `fishing/` — ignored legacy or user-selected knowledge-takeback-skill storage locations.
+- `local/`, `knowledge-takeback-skill-notes/`, `knowledge-takeback-skill-artifacts/`, `knowledge-takeback-skill-html/`, `knowledge-takeback-skill-images/`, `knowledge-takeback-skill-log.md`, `knowledge-takeback-skill-config.md`, `fishing/` — ignored legacy or user-selected knowledge-takeback-skill storage locations.
 
 ## Placement Rules
 
 - Do not put generated HTML pages at the repository root.
 - Do not put generated HTML pages inside `knowledge-takeback-skill/`; that folder should contain the skill workflow and metadata only.
 - Do not put generated `.ahtml` artifacts inside `knowledge-takeback-skill/`; save user artifacts under the knowledge-takeback-skill storage root or examples under `examples/`.
+- Do not put generated images inside `prompts/`; save runtime images under the task output directory or ignored local storage.
+- Do not commit image API keys. Use environment variables or `local/knowledge-takeback-skill/image-generation.config.json`.
 - Do not put imported upstream projects at the repository root; place them under `local/imports/`.
 - Do not put product or handoff documents at the repository root.
 - Do not publish `local/`, `node_modules/`, IDE folders, or upstream source drops; npm package contents are controlled by `package.json` `files`.

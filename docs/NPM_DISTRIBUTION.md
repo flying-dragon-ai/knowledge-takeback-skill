@@ -43,6 +43,7 @@ Included:
 - `bin/`
 - `docs/`
 - `examples/`
+- `prompts/`
 - `references/`
 - `scripts/`
 - `README.md`
@@ -56,6 +57,7 @@ Excluded:
 - `node_modules/`
 - IDE folders
 - temporary learner state
+- image API keys and local image config
 - upstream source drops
 
 ## Maintainer Checks
@@ -66,6 +68,13 @@ Run before publishing:
 npm run validate
 npm run pack:check
 npm run publish:dry
+```
+
+Check image generation syntax without calling the API:
+
+```bash
+node --check scripts/generate-image.mjs
+npm run image:generate -- --provider stepfun-cn --usage cover --prompt-file prompts/image-generation/hero-interactive-html.md --dry-run
 ```
 
 Publish when logged in to npm:
