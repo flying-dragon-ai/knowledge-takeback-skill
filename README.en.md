@@ -77,9 +77,13 @@ Place custom prompt files in:
 prompts/image-generation/
 ```
 
+Supported files are `.md` and `.txt`. Prefer usage-based names such as `hero-*`, `cover-*`, `concept-*`, `section-*`, `showcase-*`, and `style-*`. The skill decides when image generation should be triggered based on the page role and task topic.
+
 Provide image API configuration through environment variables or an ignored local config file. Do not commit API keys:
 
 ```bash
+cp .env.example .env
+KNOWLEDGE_TAKEBACK_IMAGE_PROVIDER="openai"
 KNOWLEDGE_TAKEBACK_IMAGE_BASE_URL="https://..."
 KNOWLEDGE_TAKEBACK_IMAGE_API_KEY="..."
 KNOWLEDGE_TAKEBACK_IMAGE_MODEL="..."
@@ -88,10 +92,10 @@ KNOWLEDGE_TAKEBACK_IMAGE_MODEL="..."
 Manual generation example:
 
 ```bash
-npm run image:generate -- --provider stepfun-cn --usage cover --prompt-file prompts/image-generation/hero-interactive-html.md --name demo-hero --response-format b64_json
+npm run image:generate -- --provider openai --usage cover --prompt-file prompts/image-generation/hero-interactive-html.md --name demo-hero --optional
 ```
 
-See [references/image-generation.md](references/image-generation.md) for StepFun / MiniMax providers, usage size mapping, and QA rules.
+See [references/image-generation.md](references/image-generation.md) for generic base URL, StepFun / MiniMax providers, usage size mapping, and QA rules.
 
 ## Validation
 

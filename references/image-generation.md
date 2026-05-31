@@ -67,7 +67,7 @@ KNOWLEDGE_TAKEBACK_IMAGE_API_KEY=sk-xxx
 KNOWLEDGE_TAKEBACK_IMAGE_MODEL=image-model-name
 ```
 
-If the base URL already includes `/images/generations`, the script will not append the endpoint twice.
+For OpenAI-compatible services, set the base URL to the version root such as `https://host.example/v1`; the default generic endpoint is `/images/generations`. If the base URL already includes `/images/generations`, the script will not append the endpoint twice.
 
 ## Environment And Local Config
 
@@ -191,6 +191,8 @@ StepFun options supported by the script:
 --seed 42
 --api-mode platform
 ```
+
+The StepFun request body uses `cfg_scale`, `text_mode`, `negative_prompt`, `steps`, and `seed`, matching the official curl style. Defaults can also come from `.env`: `STEPFUN_STEPS`, `STEPFUN_CFG_SCALE`, `STEPFUN_TEXT_MODE`, and `STEPFUN_SEED`.
 
 Use `--response-format b64_json` for StepFun/OpenAI-compatible providers when direct base64 output is preferred. URL responses are still acceptable because the script downloads them immediately.
 

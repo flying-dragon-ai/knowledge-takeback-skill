@@ -48,6 +48,7 @@ Secrets:
   StepFun: STEPFUN_API_KEY, STEPFUN_REGION, STEPFUN_API_MODE, STEPFUN_BASE_URL
   MiniMax: MINIMAX_API_KEY, MINIMAX_REGION, MINIMAX_BASE_URL
   Optional .env in the current working directory is loaded without overriding existing process.env values.
+  Optional StepFun defaults: STEPFUN_STEPS, STEPFUN_CFG_SCALE, STEPFUN_TEXT_MODE, STEPFUN_SEED.
 
 Common options:
   --prompt-file <file>       Prompt markdown/text file.
@@ -215,6 +216,15 @@ function pickNumber(...values) {
     if (value === undefined || value === "") continue
     const number = Number(value)
     if (Number.isFinite(number)) return number
+  }
+  return undefined
+}
+
+function pickBoolean(...values) {
+  for (const value of values) {
+    if (value === undefined || value === "") continue
+    if (typeof value === "boolean") return value
+    return parseBoolean(value)
   }
   return undefined
 }
@@ -439,7 +449,7 @@ function providerConfig(provider, options, config) {
       configValue(config, "base_url", "baseUrl"),
       process.env.KNOWLEDGE_TAKEBACK_IMAGE_BASE_URL
     ),
-    endpoint: pick(options.endpoint, config.endpoint, process.env.KNOWLEDGE_TAKEBACK_IMAGE_ENDPOINT, "/v1/images/generations"),
+    endpoint: pick(options.endpoint, config.endpoint, process.env.KNOWLEDGE_TAKEBACK_IMAGE_ENDPOINT, "/images/generations"),
     model: pick(options.model, config.model, process.env.KNOWLEDGE_TAKEBACK_IMAGE_MODEL),
     requestBody: openAiBody(options, config, usageConfig),
   }
@@ -465,16 +475,22 @@ function stepfunBody(options, config, usageConfig) {
   if (options.responseFormat || config.response_format || config.responseFormat) {
     body.response_format = pick(options.responseFormat, config.response_format, config.responseFormat)
   }
-  const steps = pickNumber(options.steps, config.steps, config.stepfun_steps, config.stepfunSteps)
+  const steps = pickNumber(options.steps, config.steps, config.stepfun_steps, config.stepfunSteps, process.env.STEPFUN_STEPS)
   if (steps !== undefined) body.steps = steps
-  const cfgScale = pickNumber(options.cfgScale, config.cfg_scale, config.cfgScale, config.stepfun_cfg_scale, config.stepfunCfgScale)
-  if (cfgScale !== undefined) body.cfgScale = cfgScale
+  const cfgScale = pickNumber(options.cfgScale, config.cfg_scale, config.cfgScale, config.stepfun_cfg_scale, config.stepfunCfgScale, process.env.STEPFUN_CFG_SCALE)
+  if (cfgScale !== undefined) body.cfg_scale = cfgScale
   const negativePrompt = pick(options.negativePrompt, config.negative_prompt, config.negativePrompt)
-  if (negativePrompt) body.negativePrompt = negativePrompt
-  if (options.textMode !== undefined) body.textMode = options.textMode
-  else if (config.text_mode !== undefined) body.textMode = Boolean(config.text_mode)
-  else if (config.textMode !== undefined) body.textMode = Boolean(config.textMode)
-  const seed = pickNumber(options.seed, config.seed)
+  if (negativePrompt) body.negative_prompt = negativePrompt
+  const textMode = pickBoolean(
+    options.textMode,
+    config.text_mode,
+    config.textMode,
+    config.stepfun_text_mode,
+    config.stepfunTextMode,
+    process.env.STEPFUN_TEXT_MODE
+  )
+  if (textMode !== undefined) body.text_mode = textMode
+  const seed = pickNumber(options.seed, config.seed, config.stepfun_seed, config.stepfunSeed, process.env.STEPFUN_SEED)
   if (seed !== undefined) body.seed = seed
   return body
 }
@@ -560,6 +576,23 @@ async function main() {
   )
 
   if (!providerSettings.baseUrl) {
+    if (options.optional) {
+      console.warn("generate-image: missing base URL; skipped image generation because --optional was set.")
+      console.log(
+        JSON.stringify(
+          {
+            fallback_reason: "missing_base_url",
+            files: [],
+            provider,
+            usage: options.usage || null,
+            usage_config: options.usage ? USAGE_MAP[options.usage] : null,
+          },
+          null,
+          2
+        )
+      )
+      return
+    }
     throw new Error("Missing base URL. Set --base-url or provider-specific base URL env.")
   }
   if (!providerSettings.apiKey && !options.dryRun) {
