@@ -1,0 +1,86 @@
+<Page title="knowledge-takeback-skill Review Artifact">
+  <Section width="content">
+    <Stack>
+      <Card>
+        <CardHeader>
+          <CardTitle>knowledge-takeback-skill 知识回流复盘</CardTitle>
+          <CardDescription>把一次 AI 辅助任务转成可验证、可迁移、可追踪的学习记录。</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Grid columns="3">
+            <Card size="sm">
+              <CardContent>
+                <Stack>
+                  <Badge variant="secondary">Observe</Badge>
+                  <Text variant="small">先捕获任务事实：文件、原文、命令输出或对话上下文。</Text>
+                </Stack>
+              </CardContent>
+            </Card>
+            <Card size="sm">
+              <CardContent>
+                <Stack>
+                  <Badge variant="outline">Verify</Badge>
+                  <Text variant="small">再区分已验证、可推断和待验证内容。</Text>
+                </Stack>
+              </CardContent>
+            </Card>
+            <Card size="sm">
+              <CardContent>
+                <Stack>
+                  <Badge variant="secondary">Transfer</Badge>
+                  <Text variant="small">最后沉淀迁移路径，让下次遇到类似任务能复用。</Text>
+                </Stack>
+              </CardContent>
+            </Card>
+          </Grid>
+        </CardContent>
+      </Card>
+
+      <Alert>
+        <Icon name="shield-check" />
+        <AlertTitle>可信检查</AlertTitle>
+        <AlertDescription>未经验证的事实不进入学习笔记；缺少证据时标为待验证。</AlertDescription>
+      </Alert>
+
+      <Timeline>
+        <TimelineItem icon="search" status="complete" meta="01 捕获">
+          <TimelineTitle>读取任务证据</TimelineTitle>
+          <TimelineDescription>从文件、命令、原文或对话中找到可以复盘的真实锚点。</TimelineDescription>
+          <TimelineContent>
+            <Cluster wrap="true">
+              <Badge variant="outline">文件路径</Badge>
+              <Badge variant="outline">命令输出</Badge>
+              <Badge variant="outline">原文段落</Badge>
+            </Cluster>
+          </TimelineContent>
+        </TimelineItem>
+        <TimelineItem icon="shield-check" status="current" meta="02 验证">
+          <TimelineTitle>建立可信边界</TimelineTitle>
+          <TimelineDescription>把结论拆成已验证、可推断、待验证三类，降低幻觉风险。</TimelineDescription>
+        </TimelineItem>
+        <TimelineItem icon="route" status="default" meta="03 迁移">
+          <TimelineTitle>形成可复用路径</TimelineTitle>
+          <TimelineDescription>输出 What-If、对比视图或挑战题，让理解变成下一次能用的方法。</TimelineDescription>
+        </TimelineItem>
+      </Timeline>
+
+      <Kanban>
+        <KanbanColumn value="understood" title="已理解">
+          <KanbanItem value="evidence-first">
+            <Text variant="small">先找证据，再讲结论。</Text>
+          </KanbanItem>
+        </KanbanColumn>
+        <KanbanColumn value="transfer" title="可迁移">
+          <KanbanItem value="what-if">
+            <Text variant="small">用 What-If 检查关键前提变化后的影响。</Text>
+          </KanbanItem>
+        </KanbanColumn>
+        <KanbanColumn value="practice" title="仍需练习">
+          <KanbanItem value="self-review">
+            <Text variant="small">独立完成一次复盘，并标注每条结论的证据等级。</Text>
+          </KanbanItem>
+        </KanbanColumn>
+      </Kanban>
+    </Stack>
+  </Section>
+</Page>

@@ -1,0 +1,23 @@
+# Local test workspace — demos, screenshots, downloaded assets, debug scripts.
+# Skill iterates only on SKILL.md / references/ / assets/ / agents/ / validate.
+local-tests/
+
+# Local agent/task state and generated learner artifacts.
+.ccg/
+fishing/
+local/
+knowledge-takeback-skill/
+knowledge-takeback-skill-notes/
+knowledge-takeback-skill-log.md
+knowledge-takeback-skill-config.md
+
+# Node + macOS
+node_modules/
+.DS_Store
+*.log
+npm-debug.log*
+
+# Editor / OS
+.vscode/
+.idea/
+.ace-tool/

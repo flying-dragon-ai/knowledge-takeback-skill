@@ -1,0 +1,8 @@
+interface:
+  display_name: "knowledge-takeback-skill"
+  short_description: "Turn AI-assisted work into verified learning artifacts."
+  brand_color: "#111827"
+  default_prompt: "Use $knowledge-takeback-skill to review the AI-assisted task we just completed, verify what is reliable, and turn it into transferable learning notes or a structured knowledge-takeback-skill Artifact."
+
+policy:
+  allow_implicit_invocation: true

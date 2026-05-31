@@ -1,0 +1,1426 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>电是什么流动的｜knowledge-takeback-skill 交互学习页</title>
+  <style>
+    :root {
+      --bg: #f4f6f8;
+      --paper: #ffffff;
+      --ink: #17202a;
+      --muted: #64748b;
+      --line: #d7dee8;
+      --soft: #eef2f7;
+      --blue: #2457c5;
+      --blue-soft: #e8f0ff;
+      --green: #1c7c54;
+      --green-soft: #e7f6ef;
+      --amber: #a05a00;
+      --amber-soft: #fff3dc;
+      --red: #b42318;
+      --red-soft: #ffebe8;
+      --shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", system-ui, sans-serif;
+      line-height: 1.6;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    a:hover,
+    a:focus-visible {
+      text-decoration: underline;
+    }
+
+    .app {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 22px 0 48px;
+    }
+
+    .topbar {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: end;
+      padding: 10px 0 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 34px;
+      line-height: 1.15;
+      font-weight: 900;
+    }
+
+    .lead {
+      margin: 12px 0 0;
+      max-width: 820px;
+      color: #334155;
+      font-size: 17px;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 38px;
+      padding: 7px 12px;
+      border: 1px solid #1e293b;
+      border-radius: 999px;
+      background: var(--paper);
+      font-size: 13px;
+      font-weight: 800;
+      white-space: nowrap;
+      box-shadow: var(--shadow);
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 12px 0;
+      background: rgba(244, 246, 248, 0.96);
+      border-bottom: 1px solid rgba(215, 222, 232, 0.75);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav button,
+    .segmented button,
+    .choice button,
+    .small-button {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--paper);
+      color: var(--ink);
+      cursor: pointer;
+      font-weight: 750;
+      min-height: 38px;
+      padding: 7px 13px;
+      transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+    }
+
+    .nav button:hover,
+    .segmented button:hover,
+    .choice button:hover,
+    .small-button:hover {
+      transform: translateY(-1px);
+      border-color: #94a3b8;
+    }
+
+    .nav button.active,
+    .segmented button.active,
+    .choice button.selected,
+    .small-button.primary {
+      border-color: #1e293b;
+      background: #1e293b;
+      color: white;
+    }
+
+    main {
+      display: grid;
+      gap: 18px;
+      margin-top: 8px;
+    }
+
+    section {
+      scroll-margin-top: 82px;
+    }
+
+    .panel {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    .panel-title {
+      margin: 0;
+      font-size: 23px;
+      line-height: 1.25;
+      font-weight: 900;
+    }
+
+    .panel-subtitle {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .grid.three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grid.two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .fact-card,
+    .source-card,
+    .quiz-card,
+    .note-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcfe;
+      padding: 14px;
+    }
+
+    .fact-card.strong {
+      border-color: #1e293b;
+      background: #f7f9fc;
+    }
+
+    .card-kicker {
+      margin: 0 0 6px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .card-title {
+      margin: 0 0 8px;
+      font-size: 18px;
+      font-weight: 900;
+      line-height: 1.3;
+    }
+
+    .card-text {
+      margin: 0;
+      color: #334155;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      border-radius: 999px;
+      padding: 4px 9px;
+      border: 1px solid var(--line);
+      background: var(--soft);
+      color: #334155;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .tag.green {
+      border-color: #9bd8ba;
+      background: var(--green-soft);
+      color: #14593d;
+    }
+
+    .tag.blue {
+      border-color: #b8ccff;
+      background: var(--blue-soft);
+      color: #1f4aa8;
+    }
+
+    .tag.amber {
+      border-color: #ffd18a;
+      background: var(--amber-soft);
+      color: #7c4300;
+    }
+
+    .trace-line {
+      display: grid;
+      grid-template-columns: 80px minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+      margin-top: 10px;
+    }
+
+    .trace-step {
+      color: var(--blue);
+      font-weight: 900;
+    }
+
+    .trace-box {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 12px;
+      background: #fbfcfe;
+    }
+
+    .diagram-wrap {
+      display: grid;
+      gap: 14px;
+    }
+
+    .terminal-row {
+      display: grid;
+      grid-template-columns: 72px minmax(0, 1fr) 72px;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .terminal {
+      border: 2px solid #1e293b;
+      border-radius: 8px;
+      min-height: 64px;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      background: #fff;
+    }
+
+    .terminal.negative {
+      color: #1f4aa8;
+      background: var(--blue-soft);
+    }
+
+    .terminal.positive {
+      color: #a1261c;
+      background: var(--red-soft);
+    }
+
+    .wire {
+      position: relative;
+      min-height: 96px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(90deg, transparent 0 4%, rgba(36, 87, 197, 0.08) 4% 96%, transparent 96%),
+        repeating-linear-gradient(90deg, #f8fafc 0 22px, #eef2f7 22px 23px);
+      overflow: hidden;
+    }
+
+    .wire::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      height: 10px;
+      transform: translateY(-50%);
+      background: #c9a36b;
+      border-top: 1px solid #946820;
+      border-bottom: 1px solid #946820;
+    }
+
+    .particle {
+      position: absolute;
+      z-index: 2;
+      top: var(--top);
+      left: 0;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 14px;
+      font-weight: 900;
+      animation-duration: 4.6s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+      animation-delay: var(--delay);
+    }
+
+    .electron {
+      color: white;
+      background: var(--blue);
+      box-shadow: 0 4px 12px rgba(36, 87, 197, 0.24);
+      animation-name: electronDrift;
+    }
+
+    @keyframes electronDrift {
+      from { transform: translateX(-36px); }
+      to { transform: translateX(calc(100vw + 260px)); }
+    }
+
+    .arrow-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .arrow-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: #fbfcfe;
+      transition: border-color 160ms ease, background 160ms ease;
+    }
+
+    .arrow-card.active {
+      border-color: #1e293b;
+      background: #f0f5ff;
+    }
+
+    .arrow-label {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-weight: 900;
+    }
+
+    .arrow {
+      position: relative;
+      height: 26px;
+      border-radius: 999px;
+      background: var(--soft);
+      overflow: hidden;
+    }
+
+    .arrow::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 70%;
+      height: 4px;
+      background: currentColor;
+      transform: translateY(-50%);
+    }
+
+    .arrow::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 0;
+      height: 0;
+      transform: translateY(-50%);
+    }
+
+    .arrow.right {
+      color: var(--blue);
+    }
+
+    .arrow.right::after {
+      left: 11%;
+    }
+
+    .arrow.right::before {
+      right: 10%;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      border-left: 12px solid currentColor;
+    }
+
+    .arrow.left {
+      color: var(--red);
+    }
+
+    .arrow.left::after {
+      right: 11%;
+    }
+
+    .arrow.left::before {
+      left: 10%;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      border-right: 12px solid currentColor;
+    }
+
+    .segmented {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .material-stage {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .carrier-canvas {
+      position: relative;
+      min-height: 270px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: linear-gradient(180deg, #fbfcfe, #eef2f7);
+      overflow: hidden;
+    }
+
+    .carrier-track {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      height: 1px;
+      background: #cbd5e1;
+    }
+
+    .carrier-node {
+      position: absolute;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      color: white;
+      box-shadow: 0 9px 18px rgba(15, 23, 42, 0.16);
+    }
+
+    .carrier-node.e {
+      background: var(--blue);
+    }
+
+    .carrier-node.plus {
+      background: var(--red);
+    }
+
+    .carrier-node.hole {
+      background: var(--amber);
+    }
+
+    .carrier-node.ion {
+      background: var(--green);
+    }
+
+    .motion-label {
+      position: absolute;
+      padding: 4px 8px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.92);
+      font-size: 12px;
+      font-weight: 800;
+      color: #334155;
+    }
+
+    .material-copy {
+      display: grid;
+      gap: 10px;
+    }
+
+    .material-title {
+      margin: 0;
+      font-size: 21px;
+      font-weight: 900;
+    }
+
+    .material-summary {
+      margin: 0;
+      color: #334155;
+    }
+
+    .mini-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .mini-list li {
+      border-left: 4px solid var(--blue);
+      background: #f8fafc;
+      padding: 9px 10px;
+      border-radius: 0 8px 8px 0;
+      color: #334155;
+    }
+
+    .calc-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 0.9fr);
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .field-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    label {
+      display: grid;
+      gap: 6px;
+      color: #334155;
+      font-weight: 800;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 8px 10px;
+      color: var(--ink);
+      background: #fff;
+    }
+
+    input[type="range"] {
+      width: 100%;
+    }
+
+    .result-box {
+      border: 1px solid #1e293b;
+      border-radius: 8px;
+      background: #f7f9fc;
+      padding: 14px;
+    }
+
+    .result-number {
+      font-size: 30px;
+      line-height: 1.2;
+      font-weight: 900;
+      color: var(--blue);
+      word-break: break-word;
+    }
+
+    .formula {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 38px;
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #f8fafc;
+      font-family: Consolas, "Cascadia Mono", monospace;
+      font-weight: 800;
+      color: #1e293b;
+    }
+
+    .quiz-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .quiz-card p {
+      margin: 0 0 10px;
+      font-weight: 900;
+    }
+
+    .choice {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .feedback {
+      min-height: 28px;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 750;
+    }
+
+    .feedback.good {
+      color: var(--green);
+    }
+
+    .feedback.bad {
+      color: var(--red);
+    }
+
+    .score-board {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcfe;
+      padding: 12px;
+      margin-top: 12px;
+    }
+
+    .score {
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--blue);
+    }
+
+    .source-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .source-card {
+      display: grid;
+      gap: 8px;
+    }
+
+    .source-card h3 {
+      margin: 0;
+      font-size: 17px;
+    }
+
+    .source-card p {
+      margin: 0;
+      color: #334155;
+    }
+
+    .source-meta {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    details {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcfe;
+      padding: 12px 14px;
+    }
+
+    details + details {
+      margin-top: 10px;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 900;
+    }
+
+    .footer {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .topbar,
+      .grid.three,
+      .grid.two,
+      .material-stage,
+      .calc-grid,
+      .source-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .status-pill {
+        justify-self: start;
+      }
+
+      .terminal-row {
+        grid-template-columns: 56px minmax(0, 1fr) 56px;
+      }
+
+      .arrow-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .app {
+        width: min(100% - 20px, 1180px);
+        padding-top: 12px;
+      }
+
+      h1 {
+        font-size: 27px;
+      }
+
+      .lead {
+        font-size: 15px;
+      }
+
+      .panel {
+        padding: 14px;
+      }
+
+      .panel-header {
+        display: grid;
+      }
+
+      .trace-line {
+        grid-template-columns: 1fr;
+      }
+
+      .terminal-row {
+        grid-template-columns: 1fr;
+      }
+
+      .terminal {
+        min-height: 48px;
+      }
+
+      .wire {
+        min-height: 86px;
+      }
+
+      .result-number {
+        font-size: 24px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">TRACEBACK VERIFIED NOTE · 2026-05-31 · 搜索交叉验证版</p>
+        <h1>电流不是“电这种东西”在流</h1>
+        <p class="lead">更准确的说法是：电流是电荷的定向移动。金属导线里主要是电子在漂移；换到盐水、半导体或等离子体，载流子就可能变成离子、空穴，或多种带电粒子一起贡献电流。</p>
+      </div>
+      <div class="status-pill" aria-label="验证状态"><span class="status-dot"></span>核心结论已验证</div>
+    </header>
+
+    <nav class="nav" aria-label="页面章节">
+      <button type="button" class="active" data-jump="overview">概览</button>
+      <button type="button" data-jump="direction">方向</button>
+      <button type="button" data-jump="materials">材料</button>
+      <button type="button" data-jump="calculator">计算</button>
+      <button type="button" data-jump="quiz">小测</button>
+      <button type="button" data-jump="sources">来源</button>
+    </nav>
+
+    <main>
+      <section id="overview" class="panel">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title">先把一句话讲准</h2>
+            <p class="panel-subtitle">knowledge-takeback-skill 目标：先验真，再把结论压缩成能迁移的学习结构。</p>
+          </div>
+          <span class="tag green">已验证：电流 = 电荷流动率</span>
+        </div>
+
+        <div class="grid three">
+          <article class="fact-card strong">
+            <p class="card-kicker">核心答案</p>
+            <h3 class="card-title">电流是电荷的定向移动</h3>
+            <p class="card-text">“电在流”是日常说法；物理上真正进入定义的是带电粒子或准粒子的运动，以及单位时间通过某个截面的电荷量。</p>
+            <div class="tag-row">
+              <span class="tag blue">I = Q / t</span>
+              <span class="tag green">单位：A</span>
+            </div>
+          </article>
+
+          <article class="fact-card">
+            <p class="card-kicker">最常见场景</p>
+            <h3 class="card-title">金属导线里主要是电子</h3>
+            <p class="card-text">铜线、铝线这类金属中，有大量可移动自由电子；加上电场后，它们在随机热运动之上出现缓慢的平均漂移。</p>
+            <div class="tag-row">
+              <span class="tag blue">电子 e-</span>
+              <span class="tag amber">漂移速度很慢</span>
+            </div>
+          </article>
+
+          <article class="fact-card">
+            <p class="card-kicker">容易混淆</p>
+            <h3 class="card-title">电子方向和传统电流方向相反</h3>
+            <p class="card-text">传统电流方向按“正电荷会移动的方向”定义。金属里移动的是负电子，所以电子漂移方向和传统电流方向相反。</p>
+            <div class="tag-row">
+              <span class="tag">电子：负极 → 正极</span>
+              <span class="tag">传统电流：正极 → 负极</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="trace-line">
+          <div class="trace-step">01 捕获</div>
+          <div class="trace-box">原笔记提出“电不是某种东西在流，而是带电粒子在定向移动”，并区分金属、电解液、半导体、等离子体。</div>
+        </div>
+        <div class="trace-line">
+          <div class="trace-step">02 验证</div>
+          <div class="trace-box">用 OpenStax、BIPM、Britannica、DOE 等来源交叉核对：定义、方向约定、不同介质中的载流子均有来源支持。</div>
+        </div>
+        <div class="trace-line">
+          <div class="trace-step">03 内化</div>
+          <div class="trace-box">可迁移规则：先问“哪个介质？”再问“哪些带电粒子能动？”最后再判断“载流子方向”和“传统电流方向”。</div>
+        </div>
+      </section>
+
+      <section id="direction" class="panel">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title">方向不是矛盾，是约定</h2>
+            <p class="panel-subtitle">下面固定左端为负极、右端为正极。蓝色电子从负极向正极漂移；红色传统电流箭头相反。</p>
+          </div>
+          <div class="segmented" role="group" aria-label="方向强调">
+            <button type="button" class="active" data-mode="electron">突出电子方向</button>
+            <button type="button" data-mode="current">突出传统电流</button>
+          </div>
+        </div>
+
+        <div class="diagram-wrap">
+          <div class="terminal-row" aria-label="导线方向动画">
+            <div class="terminal negative">负极</div>
+            <div class="wire" id="wire" aria-hidden="true"></div>
+            <div class="terminal positive">正极</div>
+          </div>
+
+          <div class="arrow-grid">
+            <div class="arrow-card active" id="electronCard">
+              <div class="arrow-label">
+                <span>电子实际漂移</span>
+                <span>负 → 正</span>
+              </div>
+              <div class="arrow right" aria-hidden="true"></div>
+              <p class="card-text">电子带负电，受电场力方向与电场相反；在这张图中，电子从左侧负极端向右侧正极端漂移。</p>
+            </div>
+            <div class="arrow-card" id="currentCard">
+              <div class="arrow-label">
+                <span>传统电流方向</span>
+                <span>正 → 负</span>
+              </div>
+              <div class="arrow left" aria-hidden="true"></div>
+              <p class="card-text">电路分析默认采用“正电荷会移动的方向”。因此在金属导线中，它和电子漂移方向相反。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="materials" class="panel">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title">不同介质里，流动者不一样</h2>
+            <p class="panel-subtitle">切换材料，观察“能动的带电粒子”如何改变。结论别背成“永远是电子”。</p>
+          </div>
+          <div class="segmented" role="group" aria-label="选择材料">
+            <button type="button" class="active" data-material="metal">金属</button>
+            <button type="button" data-material="electrolyte">电解液</button>
+            <button type="button" data-material="semiconductor">半导体</button>
+            <button type="button" data-material="plasma">等离子体</button>
+          </div>
+        </div>
+
+        <div class="material-stage">
+          <div class="carrier-canvas" id="carrierCanvas" aria-label="载流子示意图"></div>
+          <div class="material-copy">
+            <div class="fact-card strong">
+              <p class="card-kicker" id="materialKicker">金属导体</p>
+              <h3 class="material-title" id="materialTitle">主要载流子：自由电子</h3>
+              <p class="material-summary" id="materialSummary">金属中正离子骨架通常固定在晶格附近，真正能大范围移动的是自由电子。</p>
+              <div class="tag-row" id="materialTags"></div>
+            </div>
+            <ul class="mini-list" id="materialFacts"></ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="calculator" class="panel">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title">把“流动”量化一下</h2>
+            <p class="panel-subtitle">电流不是速度，而是电荷通过率：单位时间穿过某个截面的电荷量。</p>
+          </div>
+          <span class="formula">I = Q / t</span>
+        </div>
+
+        <div class="calc-grid">
+          <div class="fact-card">
+            <div class="field-grid">
+              <label>
+                通过截面的电荷量 Q（库仑 C）
+                <input id="chargeInput" type="number" value="1" min="0" step="0.1">
+              </label>
+              <label>
+                用时 t（秒 s）
+                <input id="timeInput" type="number" value="1" min="0.001" step="0.1">
+              </label>
+              <label>
+                快速调节电荷量
+                <input id="chargeSlider" type="range" min="0" max="10" value="1" step="0.1">
+              </label>
+            </div>
+          </div>
+          <div class="result-box" aria-live="polite">
+            <p class="card-kicker">计算结果</p>
+            <div class="result-number" id="currentResult">1 A</div>
+            <p class="card-text" id="chargeRateResult">约等于每秒 6.242e+18 个基本电荷通过截面。</p>
+            <div class="tag-row">
+              <span class="tag blue">1 A = 1 C/s</span>
+              <span class="tag green">e = 1.602176634e-19 C</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title">三个 What-If：换个场景还成立吗？</h2>
+            <p class="panel-subtitle">把结论迁移到交流电、电池内部、神经信号等场景时，先抓住载流子和方向约定。</p>
+          </div>
+        </div>
+        <details open>
+          <summary>如果是交流电，电子是不是一路从电厂跑到家里？</summary>
+          <p class="card-text">不是。交流电中电场周期性反向，金属导线中的电子主要是在原位置附近来回漂移；能量传递可以很快，但单个电子的平均漂移速度通常很慢。</p>
+        </details>
+        <details>
+          <summary>如果是在电池内部或盐水里，还是电子穿过液体吗？</summary>
+          <p class="card-text">通常不是。电解液中的电流主要由正负离子迁移承担；电子一般在外部金属导线中移动，到了电极处通过化学反应完成电荷转移。</p>
+        </details>
+        <details>
+          <summary>如果是半导体，空穴到底是不是“真粒子”？</summary>
+          <p class="card-text">空穴是准粒子：它表示价带中缺少一个电子的状态。虽然不是一个独立小球，但在电场和磁场中可以像带正电的移动载流子那样参与电流分析。</p>
+        </details>
+      </section>
+
+      <section id="quiz" class="panel">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title">5 题快速自测</h2>
+            <p class="panel-subtitle">点选后会立即反馈；目标不是记答案，而是检查“介质 → 载流子 → 方向”的判断链。</p>
+          </div>
+          <button type="button" class="small-button" id="resetQuiz">重置小测</button>
+        </div>
+
+        <div class="quiz-list" id="quizList"></div>
+        <div class="score-board">
+          <div>
+            <p class="card-kicker">当前得分</p>
+            <div class="score" id="scoreText">0 / 5</div>
+          </div>
+          <p class="card-text" id="scoreHint">完成后会给出掌握建议。</p>
+        </div>
+      </section>
+
+      <section id="sources" class="panel">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title">搜索交叉验证记录</h2>
+            <p class="panel-subtitle">以下为本页采用的事实锚点。页面内容为转述和教学化整理，不是长篇摘录。</p>
+          </div>
+          <span class="tag amber">待确认：具体材料需看材料组成</span>
+        </div>
+
+        <div class="source-grid">
+          <article class="source-card">
+            <h3>BIPM：安培的 SI 定义</h3>
+            <p>支持结论：1 A 对应单位时间内通过的基本电荷数量；电流可以量化为电荷通过率。</p>
+            <div class="source-meta">关键词：ampere, elementary charge, charges per second</div>
+            <a href="https://www.bipm.org/en/si-base-units/ampere" target="_blank" rel="noreferrer">打开来源</a>
+          </article>
+
+          <article class="source-card">
+            <h3>OpenStax College Physics：Current</h3>
+            <p>支持结论：传统电流按正电荷方向定义；金属导线由电子携带电流；盐水等离子溶液中正负电荷都可移动。</p>
+            <div class="source-meta">关键词：conventional current, electrons, ionic solutions</div>
+            <a href="https://openstax.org/books/college-physics/pages/20-1-current" target="_blank" rel="noreferrer">打开来源</a>
+          </article>
+
+          <article class="source-card">
+            <h3>OpenStax Physics：Ohm's law</h3>
+            <p>支持结论：在普通导线中移动电荷通常是电子；传统电流与电子运动方向相反但数学上等价。</p>
+            <div class="source-meta">关键词：positive charge, electron carriers, conventional current</div>
+            <a href="https://openstax.org/books/physics/pages/19-1-ohms-law" target="_blank" rel="noreferrer">打开来源</a>
+          </article>
+
+          <article class="source-card">
+            <h3>OpenStax University Physics：Semiconductors</h3>
+            <p>支持结论：半导体可用电子和空穴描述导电；n 型以电子为主要载流子，p 型以空穴为主要载流子。</p>
+            <div class="source-meta">关键词：n-type, p-type, holes, charge carriers</div>
+            <a href="https://openstax.org/books/university-physics-volume-3/pages/9-6-semiconductors-and-doping" target="_blank" rel="noreferrer">打开来源</a>
+          </article>
+
+          <article class="source-card">
+            <h3>Britannica：Electric current</h3>
+            <p>支持结论：电流是电荷载流子的运动，载流子可以是电子、离子、空穴等。</p>
+            <div class="source-meta">关键词：charge carriers, electrons, ions, holes</div>
+            <a href="https://www.britannica.com/science/electric-current" target="_blank" rel="noreferrer">打开来源</a>
+          </article>
+
+          <article class="source-card">
+            <h3>Britannica / DOE：电解液与等离子体</h3>
+            <p>支持结论：电解液中电流由离子迁移承担；等离子体由正离子和自由电子等带电粒子组成，因而能导电。</p>
+            <div class="source-meta">关键词：electrolyte ions, plasma ions electrons</div>
+            <a href="https://www.britannica.com/science/electrochemical-reaction" target="_blank" rel="noreferrer">电解液来源</a>
+            <span> · </span>
+            <a href="https://www.energy.gov/science/doe-explainsplasma" target="_blank" rel="noreferrer">等离子体来源</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title">一页纸学习笔记</h2>
+            <p class="panel-subtitle">可保存的压缩版：先抓定义，再按介质拆载流子。</p>
+          </div>
+          <span class="tag green">knowledge-takeback-skill Note</span>
+        </div>
+        <div class="grid three">
+          <article class="note-card">
+            <p class="card-kicker">问题</p>
+            <h3 class="card-title">电是什么流动的？</h3>
+            <p class="card-text">电流是电荷的定向移动，不是“电这种物质”在管道里流。</p>
+          </article>
+          <article class="note-card">
+            <p class="card-kicker">关键区分</p>
+            <h3 class="card-title">电子方向 vs 传统电流方向</h3>
+            <p class="card-text">电子带负电，所以在金属中实际漂移方向与传统电流方向相反。</p>
+          </article>
+          <article class="note-card">
+            <p class="card-kicker">迁移规则</p>
+            <h3 class="card-title">先问介质，再问载流子</h3>
+            <p class="card-text">金属看电子，电解液看离子，半导体看电子和空穴，等离子体看电子和离子。</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <p class="footer">本 HTML 为本地交互学习页；信息经公开来源交叉验证，具体材料的载流子仍需按材料组成和实验条件判断。</p>
+  </div>
+
+  <script>
+    const ELEMENTARY_CHARGE = 1.602176634e-19;
+
+    const wire = document.getElementById("wire");
+    for (let i = 0; i < 12; i += 1) {
+      const electron = document.createElement("span");
+      electron.className = "particle electron";
+      electron.textContent = "-";
+      electron.style.setProperty("--top", `${26 + (i % 3) * 17}px`);
+      electron.style.setProperty("--delay", `${-i * 0.38}s`);
+      wire.appendChild(electron);
+    }
+
+    document.querySelectorAll("[data-jump]").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll("[data-jump]").forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+        document.getElementById(button.dataset.jump).scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+
+    const directionButtons = document.querySelectorAll("[data-mode]");
+    const electronCard = document.getElementById("electronCard");
+    const currentCard = document.getElementById("currentCard");
+
+    directionButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        directionButtons.forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+        const mode = button.dataset.mode;
+        electronCard.classList.toggle("active", mode === "electron");
+        currentCard.classList.toggle("active", mode === "current");
+      });
+    });
+
+    const materials = {
+      metal: {
+        kicker: "金属导体",
+        title: "主要载流子：自由电子",
+        summary: "金属中正离子骨架通常固定在晶格附近，真正能大范围移动的是自由电子。",
+        tags: ["电子", "传统电流相反", "漂移速度慢"],
+        facts: [
+          "适用例子：铜线、铝线、金属电阻丝。",
+          "电场建立后，电子在随机热运动上叠加一个平均漂移。",
+          "灯很快亮，不代表同一个电子瞬间跑完整条线；电信号传播和电子漂移速度不是一回事。"
+        ],
+        nodes: [
+          ["e", "-", 12, 42], ["e", "-", 28, 56], ["e", "-", 44, 38], ["e", "-", 62, 58], ["e", "-", 78, 43]
+        ],
+        labels: [["电子漂移：负极 → 正极", 18, 18], ["传统电流：正极 → 负极", 48, 222]]
+      },
+      electrolyte: {
+        kicker: "电解液",
+        title: "主要载流子：正离子和负离子",
+        summary: "盐水、酸碱溶液或熔融电解质中，电荷主要靠离子迁移穿过液体。",
+        tags: ["阳离子", "阴离子", "电极反应"],
+        facts: [
+          "阳离子向阴极移动，阴离子向阳极移动。",
+          "电子通常走外部金属导线；溶液内部主要是离子迁移。",
+          "电极表面通过氧化还原反应完成电子与离子之间的电荷交接。"
+        ],
+        nodes: [
+          ["ion", "+", 14, 40], ["plus", "+", 33, 62], ["ion", "-", 52, 40], ["plus", "+", 68, 65], ["ion", "-", 82, 46]
+        ],
+        labels: [["阳离子 → 阴极", 16, 18], ["阴离子 → 阳极", 50, 222]]
+      },
+      semiconductor: {
+        kicker: "半导体",
+        title: "主要载流子：电子和空穴",
+        summary: "半导体不是只看电子。n 型材料电子占主导，p 型材料空穴占主导；二极管、晶体管要同时考虑它们。",
+        tags: ["n 型电子", "p 型空穴", "准粒子"],
+        facts: [
+          "空穴不是独立小球，而是缺少电子的可移动状态。",
+          "用空穴当正电载流子，可以简化半导体电流分析。",
+          "多数载流子和少数载流子会影响器件行为，例如二极管和晶体管。"
+        ],
+        nodes: [
+          ["e", "-", 18, 42], ["hole", "+", 36, 62], ["e", "-", 54, 38], ["hole", "+", 70, 64], ["e", "-", 84, 46]
+        ],
+        labels: [["n 型：电子多", 15, 18], ["p 型：空穴多", 55, 222]]
+      },
+      plasma: {
+        kicker: "等离子体",
+        title: "主要载流子：电子和离子",
+        summary: "等离子体是电离气体，含有自由电子和离子，因此会受电场、磁场影响并可导电。",
+        tags: ["自由电子", "正离子", "可导电气体"],
+        facts: [
+          "例子包括闪电、霓虹灯、太阳风、聚变实验中的高温等离子体。",
+          "电子和离子质量差异很大，所以响应电磁场的方式不同。",
+          "具体电流贡献取决于电离程度、密度、温度和外部场。"
+        ],
+        nodes: [
+          ["e", "-", 14, 36], ["plus", "+", 30, 68], ["e", "-", 48, 50], ["plus", "+", 66, 34], ["e", "-", 80, 66]
+        ],
+        labels: [["电子与离子共同参与", 16, 18], ["受电场和磁场强烈影响", 37, 222]]
+      }
+    };
+
+    const materialButtons = document.querySelectorAll("[data-material]");
+    const materialKicker = document.getElementById("materialKicker");
+    const materialTitle = document.getElementById("materialTitle");
+    const materialSummary = document.getElementById("materialSummary");
+    const materialTags = document.getElementById("materialTags");
+    const materialFacts = document.getElementById("materialFacts");
+    const carrierCanvas = document.getElementById("carrierCanvas");
+
+    function renderMaterial(key) {
+      const data = materials[key];
+      materialKicker.textContent = data.kicker;
+      materialTitle.textContent = data.title;
+      materialSummary.textContent = data.summary;
+      materialTags.innerHTML = "";
+      data.tags.forEach((tag, index) => {
+        const span = document.createElement("span");
+        span.className = `tag ${index === 0 ? "blue" : index === 1 ? "green" : "amber"}`;
+        span.textContent = tag;
+        materialTags.appendChild(span);
+      });
+      materialFacts.innerHTML = "";
+      data.facts.forEach((fact) => {
+        const li = document.createElement("li");
+        li.textContent = fact;
+        materialFacts.appendChild(li);
+      });
+      carrierCanvas.innerHTML = "";
+      [70, 136, 202].forEach((top) => {
+        const track = document.createElement("span");
+        track.className = "carrier-track";
+        track.style.top = `${top}px`;
+        carrierCanvas.appendChild(track);
+      });
+      data.nodes.forEach(([type, text, left, top], index) => {
+        const node = document.createElement("span");
+        node.className = `carrier-node ${type}`;
+        node.textContent = text;
+        node.style.left = `${left}%`;
+        node.style.top = `${top}%`;
+        node.style.transform = `translate(-50%, -50%) translateX(${index % 2 === 0 ? "-4px" : "4px"})`;
+        carrierCanvas.appendChild(node);
+      });
+      data.labels.forEach(([text, left, top]) => {
+        const label = document.createElement("span");
+        label.className = "motion-label";
+        label.textContent = text;
+        label.style.left = `${left}%`;
+        label.style.top = `${top}px`;
+        carrierCanvas.appendChild(label);
+      });
+    }
+
+    materialButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        materialButtons.forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+        renderMaterial(button.dataset.material);
+      });
+    });
+
+    renderMaterial("metal");
+
+    const chargeInput = document.getElementById("chargeInput");
+    const timeInput = document.getElementById("timeInput");
+    const chargeSlider = document.getElementById("chargeSlider");
+    const currentResult = document.getElementById("currentResult");
+    const chargeRateResult = document.getElementById("chargeRateResult");
+
+    function formatNumber(value) {
+      if (!Number.isFinite(value)) return "无法计算";
+      if (value === 0) return "0";
+      const abs = Math.abs(value);
+      if (abs >= 100000 || abs < 0.001) return value.toExponential(3);
+      return value.toLocaleString("zh-CN", { maximumFractionDigits: 4 });
+    }
+
+    function updateCalculator() {
+      const q = Number(chargeInput.value);
+      const t = Number(timeInput.value);
+      if (!Number.isFinite(q) || !Number.isFinite(t) || t <= 0) {
+        currentResult.textContent = "请输入有效数值";
+        chargeRateResult.textContent = "时间必须大于 0。";
+        return;
+      }
+      const current = q / t;
+      const elementaryPerSecond = Math.abs(current) / ELEMENTARY_CHARGE;
+      currentResult.textContent = `${formatNumber(current)} A`;
+      chargeRateResult.textContent = `约等于每秒 ${formatNumber(elementaryPerSecond)} 个基本电荷通过截面。`;
+    }
+
+    chargeInput.addEventListener("input", () => {
+      chargeSlider.value = Math.max(0, Math.min(10, Number(chargeInput.value) || 0));
+      updateCalculator();
+    });
+    timeInput.addEventListener("input", updateCalculator);
+    chargeSlider.addEventListener("input", () => {
+      chargeInput.value = chargeSlider.value;
+      updateCalculator();
+    });
+    updateCalculator();
+
+    const quiz = [
+      {
+        question: "1. 电流最一般的物理定义是什么？",
+        options: ["电子的速度", "电荷的定向移动或通过率", "电压本身在流动"],
+        answer: 1,
+        explain: "对。电流关注的是电荷通过某个截面的速率，而不是单个粒子速度。"
+      },
+      {
+        question: "2. 普通金属导线中主要移动的载流子是？",
+        options: ["自由电子", "固定不动的原子核", "中性原子整体"],
+        answer: 0,
+        explain: "对。金属晶格中的正离子基本固定，自由电子能大范围移动。"
+      },
+      {
+        question: "3. 传统电流方向按什么定义？",
+        options: ["负电荷移动方向", "正电荷会移动的方向", "电子热运动方向"],
+        answer: 1,
+        explain: "对。传统电流方向按正电荷方向定义，所以在金属中与电子方向相反。"
+      },
+      {
+        question: "4. 盐水等电解液中，电流主要靠什么承担？",
+        options: ["只有电子穿过溶液", "正负离子的迁移", "光子流动"],
+        answer: 1,
+        explain: "对。电解液内部主要是阳离子和阴离子分别迁移。"
+      },
+      {
+        question: "5. p 型半导体里常说的主要载流子是？",
+        options: ["空穴", "中子", "水分子"],
+        answer: 0,
+        explain: "对。p 型半导体通常把空穴视为主要正电载流子。"
+      }
+    ];
+
+    const quizList = document.getElementById("quizList");
+    const scoreText = document.getElementById("scoreText");
+    const scoreHint = document.getElementById("scoreHint");
+    const resetQuiz = document.getElementById("resetQuiz");
+    const answers = new Map();
+
+    function updateScore() {
+      let score = 0;
+      answers.forEach((isCorrect) => {
+        if (isCorrect) score += 1;
+      });
+      scoreText.textContent = `${score} / ${quiz.length}`;
+      if (answers.size < quiz.length) {
+        scoreHint.textContent = `已完成 ${answers.size} 题，继续点选即可。`;
+      } else if (score === quiz.length) {
+        scoreHint.textContent = "方向、载流子、介质三条判断链都已经过关。";
+      } else if (score >= 3) {
+        scoreHint.textContent = "整体理解不错，建议再看一遍材料切换区。";
+      } else {
+        scoreHint.textContent = "建议回到概览和方向区，先把定义与方向约定分开。";
+      }
+    }
+
+    function renderQuiz() {
+      quizList.innerHTML = "";
+      answers.clear();
+      quiz.forEach((item, questionIndex) => {
+        const card = document.createElement("article");
+        card.className = "quiz-card";
+        const question = document.createElement("p");
+        question.textContent = item.question;
+        const choices = document.createElement("div");
+        choices.className = "choice";
+        const feedback = document.createElement("div");
+        feedback.className = "feedback";
+        feedback.textContent = "请选择一个答案。";
+
+        item.options.forEach((option, optionIndex) => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.textContent = option;
+          button.addEventListener("click", () => {
+            choices.querySelectorAll("button").forEach((choice) => choice.classList.remove("selected"));
+            button.classList.add("selected");
+            const isCorrect = optionIndex === item.answer;
+            answers.set(questionIndex, isCorrect);
+            feedback.className = `feedback ${isCorrect ? "good" : "bad"}`;
+            feedback.textContent = isCorrect ? item.explain : `还差一点。正确判断：${item.options[item.answer]}。`;
+            updateScore();
+          });
+          choices.appendChild(button);
+        });
+
+        card.appendChild(question);
+        card.appendChild(choices);
+        card.appendChild(feedback);
+        quizList.appendChild(card);
+      });
+      updateScore();
+    }
+
+    resetQuiz.addEventListener("click", renderQuiz);
+    renderQuiz();
+  </script>
+</body>
+</html>

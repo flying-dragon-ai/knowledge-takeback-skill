@@ -1,0 +1,51 @@
+{
+  "name": "knowledge-takeback-skill",
+  "version": "1.0.0",
+  "description": "knowledge-takeback-skill turns AI-assisted complex cognitive work into verified learning and structured knowledge-takeback-skill artifacts.",
+  "type": "module",
+  "bin": {
+    "knowledge-takeback-skill": "bin/knowledge-takeback-skill.mjs"
+  },
+  "files": [
+    "SKILL.md",
+    "knowledge-takeback-skill/",
+    "agents/",
+    "assets/",
+    "bin/",
+    "docs/",
+    "examples/",
+    "references/",
+    "scripts/",
+    "README.md",
+    "README.en.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "validate": "npm run check",
+    "check": "node --check bin/knowledge-takeback-skill.mjs && node --check scripts/validate-social-deck.mjs && node --check assets/magazine-bg-webgl.js && node --check scripts/validate-knowledge-takeback-skill-artifact.mjs && node scripts/validate-knowledge-takeback-skill-artifact.mjs --self-test",
+    "pack:check": "npm pack --dry-run",
+    "publish:dry": "npm publish --dry-run",
+    "validate:artifact": "node scripts/validate-knowledge-takeback-skill-artifact.mjs",
+    "validate:social-deck": "node scripts/validate-social-deck.mjs"
+  },
+  "keywords": [
+    "codex-skill",
+    "knowledge-takeback",
+    "knowledge-takeback-skill",
+    "learning",
+    "ai-assisted-work",
+    "artifact-dsl",
+    "agent-html-compatible"
+  ],
+  "author": "",
+  "license": "AGPL-3.0-only",
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "playwright": "^1.60.0"
+  }
+}

@@ -1,0 +1,1182 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>复旦大学 vs 清华大学｜科技成果转化路径对比</title>
+  <style>
+    :root {
+      --bg: #eef1f4;
+      --paper: #fffdf8;
+      --paper-2: #f8f5ec;
+      --ink: #172033;
+      --muted: #667085;
+      --line: #d9d3c5;
+      --line-strong: #9f927d;
+      --navy: #173b65;
+      --navy-soft: #edf3f8;
+      --green: #2f6b56;
+      --green-soft: #edf6f1;
+      --amber: #8a5a10;
+      --amber-soft: #fbf2df;
+      --red: #a33d31;
+      --red-soft: #fbebe8;
+      --violet: #5b4b82;
+      --violet-soft: #f1eef8;
+      --shadow: 0 18px 45px rgba(23, 32, 51, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        linear-gradient(90deg, rgba(23, 59, 101, 0.035) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(23, 59, 101, 0.025) 1px, transparent 1px),
+        var(--bg);
+      background-size: 28px 28px;
+      color: var(--ink);
+      font-family: "Noto Sans SC", "Microsoft YaHei", "PingFang SC", "Segoe UI", system-ui, sans-serif;
+      line-height: 1.72;
+    }
+
+    button, input { font: inherit; }
+    a { color: var(--navy); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    a:hover, a:focus-visible { color: #0f2c50; }
+
+    .app {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 28px 0 64px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 330px;
+      gap: 0;
+      align-items: stretch;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-top: 5px solid var(--navy);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-main, .hero-side, .panel {
+      background: var(--paper);
+      border: 1px solid var(--line);
+    }
+
+    .hero-main {
+      border: none;
+      padding: 30px 34px 28px;
+    }
+
+    .hero-side {
+      border-width: 0 0 0 1px;
+      padding: 24px;
+      display: grid;
+      align-content: space-between;
+      gap: 18px;
+      background: var(--paper-2);
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--navy);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    h1, h2, h3 {
+      font-family: "Noto Serif SC", "Songti SC", SimSun, "Times New Roman", serif;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 870px;
+      font-size: 36px;
+      line-height: 1.2;
+      font-weight: 900;
+    }
+
+    .lead {
+      max-width: 900px;
+      margin: 18px 0 0;
+      color: #344054;
+      font-size: 16px;
+      border-left: 3px solid var(--navy);
+      padding-left: 14px;
+    }
+
+    .abstract-box {
+      display: grid;
+      gap: 8px;
+      margin-top: 18px;
+      padding: 14px 16px;
+      background: #f7f3e9;
+      border: 1px solid var(--line);
+    }
+
+    .abstract-box strong {
+      color: var(--navy);
+      font-size: 13px;
+    }
+
+    .abstract-box p {
+      margin: 0;
+      color: #344054;
+      font-size: 14px;
+    }
+
+    .meta-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 18px;
+      border-top: 1px solid var(--line);
+      padding-top: 14px;
+    }
+
+    .meta-item {
+      display: grid;
+      grid-template-columns: 82px minmax(0, 1fr);
+      gap: 10px;
+      color: #344054;
+      font-size: 13px;
+    }
+
+    .meta-item dt {
+      color: var(--navy);
+      font-weight: 800;
+    }
+
+    .meta-item dd { margin: 0; }
+
+    .stamp {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: max-content;
+      min-height: 30px;
+      border: 1px solid var(--line-strong);
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 800;
+      background: var(--paper);
+      color: var(--navy);
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      background: var(--green);
+    }
+
+    .metric-grid { display: grid; gap: 10px; }
+
+    .metric {
+      border-left: 3px solid var(--navy);
+      padding: 9px 0 9px 12px;
+      background: transparent;
+    }
+
+    .metric strong {
+      display: block;
+      font-family: "Noto Serif SC", "Songti SC", SimSun, serif;
+      font-size: 23px;
+      line-height: 1.1;
+      color: var(--navy);
+    }
+
+    .metric span {
+      display: block;
+      color: #5b6472;
+      font-size: 12px;
+      margin-top: 6px;
+      line-height: 1.55;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      margin: 18px 0 0;
+      padding: 8px;
+      background: rgba(255, 253, 248, 0.94);
+      border: 1px solid var(--line);
+      box-shadow: 0 8px 24px rgba(23, 32, 51, 0.05);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav button, .segmented button, .choice button, .small-button {
+      border: 1px solid transparent;
+      background: transparent;
+      color: #344054;
+      min-height: 36px;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-weight: 750;
+      transition: border-color 160ms ease, background 160ms ease, color 160ms ease;
+    }
+
+    .nav button:hover, .segmented button:hover, .choice button:hover, .small-button:hover {
+      border-color: var(--line-strong);
+      background: #f5efe2;
+      color: var(--navy);
+    }
+
+    .nav button.active, .segmented button.active, .choice button.selected, .small-button.primary {
+      border-color: var(--navy);
+      background: var(--navy);
+      color: #fff;
+    }
+
+    main {
+      display: grid;
+      gap: 18px;
+      margin-top: 18px;
+      counter-reset: section;
+    }
+
+    section { scroll-margin-top: 92px; }
+
+    .panel {
+      padding: 22px 24px;
+      box-shadow: 0 12px 34px rgba(23, 32, 51, 0.05);
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 12px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.25;
+      font-weight: 900;
+    }
+
+    .panel-header h2::before {
+      counter-increment: section;
+      content: counter(section, decimal-leading-zero) "  ";
+      color: var(--line-strong);
+      font-family: "Times New Roman", serif;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      margin: 7px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .segmented {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 3px;
+      border: 1px solid var(--line);
+      background: var(--paper-2);
+    }
+
+    .grid { display: grid; gap: 12px; }
+    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .card, .compare-row, .source-card, .quiz-card, .path-step, .role-card {
+      border: 1px solid var(--line);
+      background: #fffefa;
+      padding: 14px;
+    }
+
+    .card.strong {
+      border-color: var(--line-strong);
+      background: #f8f4ea;
+    }
+
+    .kicker {
+      margin: 0 0 7px;
+      color: var(--navy);
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .card h3, .source-card h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      line-height: 1.35;
+      font-weight: 900;
+    }
+
+    .card p, .source-card p, .role-card p { margin: 0; color: #344054; }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 16px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      min-height: 26px;
+      padding: 3px 8px;
+      background: #f9f6ed;
+      color: #344054;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .tag.blue { border-color: #b9c9d9; background: var(--navy-soft); color: var(--navy); }
+    .tag.green { border-color: #b9d5c7; background: var(--green-soft); color: var(--green); }
+    .tag.amber { border-color: #e7c98f; background: var(--amber-soft); color: var(--amber); }
+    .tag.violet { border-color: #c9c0dd; background: var(--violet-soft); color: var(--violet); }
+    .tag.red { border-color: #e9b9b2; background: var(--red-soft); color: var(--red); }
+
+    .flow {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .flow-lane {
+      border: 1px solid var(--line);
+      background: #fffefa;
+      padding: 14px;
+    }
+
+    .lane-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      border-bottom: 2px solid var(--line);
+      padding-bottom: 9px;
+      margin-bottom: 10px;
+    }
+
+    .lane-title strong {
+      font-family: "Noto Serif SC", "Songti SC", SimSun, serif;
+      font-size: 19px;
+    }
+
+    .path {
+      display: grid;
+      gap: 8px;
+      counter-reset: path;
+    }
+
+    .path-step {
+      position: relative;
+      display: grid;
+      grid-template-columns: 36px minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      background: #fffefa;
+    }
+
+    .num {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line-strong);
+      background: var(--paper-2);
+      color: var(--navy);
+      font-family: "Times New Roman", serif;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .step-title { font-weight: 900; line-height: 1.35; color: var(--navy); }
+    .step-text { color: #4b5565; font-size: 14px; margin-top: 4px; }
+
+    .compare-table {
+      display: grid;
+      gap: 0;
+      border: 1px solid var(--line);
+      background: var(--paper);
+    }
+
+    .compare-row {
+      display: grid;
+      grid-template-columns: 170px minmax(0, 1fr) minmax(0, 1fr);
+      gap: 0;
+      align-items: stretch;
+      border: none;
+      border-bottom: 1px solid var(--line);
+      padding: 0;
+      background: #fffefa;
+    }
+
+    .compare-row:last-child { border-bottom: none; }
+
+    .compare-head {
+      background: var(--navy);
+      color: #fff;
+      font-weight: 900;
+    }
+
+    .compare-head div {
+      padding: 11px 12px;
+      border-left: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .compare-head div:first-child { border-left: none; }
+
+    .compare-cell {
+      border-left: 1px solid var(--line);
+      padding: 12px;
+      color: #344054;
+      min-width: 0;
+    }
+
+    .compare-cell:first-child {
+      border-left: none;
+      font-weight: 900;
+      color: var(--navy);
+      background: #f8f4ea;
+    }
+
+    .bars { display: grid; gap: 11px; }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 150px minmax(0, 1fr) 46px;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .bar-track {
+      height: 10px;
+      background: #e5dfd2;
+      overflow: hidden;
+      border: 1px solid #d5cbbb;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: var(--navy);
+      width: var(--w);
+    }
+
+    .bar-fill.green { background: var(--green); }
+    .bar-fill.violet { background: var(--violet); }
+    .bar-fill.amber { background: var(--amber); }
+    .bar-row span { color: #344054; font-weight: 800; font-size: 13px; }
+
+    details {
+      border: 1px solid var(--line);
+      background: #fffefa;
+      padding: 12px 14px;
+    }
+
+    details + details { margin-top: 9px; }
+    summary { cursor: pointer; font-weight: 900; color: var(--navy); }
+    details p { margin: 8px 0 0; color: #344054; }
+
+    .role-card { min-height: 154px; }
+    .role-card h3 { margin: 0 0 9px; font-size: 19px; }
+    .role-card ul { margin: 10px 0 0; padding-left: 20px; color: #344054; }
+    .role-card li + li { margin-top: 5px; }
+
+    .source-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .source-card {
+      display: grid;
+      gap: 8px;
+      border-left: 3px solid var(--line-strong);
+    }
+
+    .source-meta {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      border-top: 1px solid var(--line);
+      padding-top: 7px;
+    }
+
+    .quiz-list { display: grid; gap: 12px; }
+    .quiz-card p { margin: 0 0 10px; font-weight: 900; color: var(--navy); }
+    .choice { display: flex; flex-wrap: wrap; gap: 8px; }
+    .feedback { min-height: 28px; margin-top: 10px; color: var(--muted); font-size: 14px; font-weight: 800; }
+    .feedback.good { color: var(--green); }
+    .feedback.bad { color: var(--red); }
+
+    .score-board {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      border: 1px solid var(--line);
+      padding: 12px 14px;
+      background: var(--paper-2);
+      margin-top: 12px;
+    }
+
+    .score {
+      font-family: "Times New Roman", serif;
+      font-size: 27px;
+      font-weight: 900;
+      color: var(--navy);
+    }
+
+    .footer {
+      margin-top: 18px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 13px;
+    }
+
+    @media (max-width: 980px) {
+      .app { width: min(100% - 28px, 1180px); }
+      .hero, .flow, .grid.two, .grid.three, .grid.four, .source-grid { grid-template-columns: 1fr; }
+      .hero-side { border-width: 1px 0 0; }
+      .compare-row { grid-template-columns: 1fr; }
+      .compare-cell { border-left: none; border-top: 1px solid var(--line); }
+      .compare-cell:first-child { border-top: none; }
+      .compare-head div { border-left: none; border-top: 1px solid rgba(255, 255, 255, 0.18); }
+      .compare-head div:first-child { border-top: none; }
+    }
+
+    @media (max-width: 560px) {
+      .app { width: min(100% - 20px, 1180px); padding-top: 14px; }
+      h1 { font-size: 28px; }
+      .lead { font-size: 15px; }
+      .panel, .hero-main, .hero-side { padding: 16px; }
+      .panel-header { display: grid; }
+      .bar-row { grid-template-columns: 1fr; }
+      .path-step { grid-template-columns: 1fr; }
+      .meta-item { grid-template-columns: 1fr; gap: 2px; }
+      .nav { position: static; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="hero">
+      <div class="hero-main">
+        <p class="eyebrow">TRACEBACK RESEARCH BRIEF · 2026-05-31 · 官方来源优先</p>
+        <h1>复旦大学和清华大学的科技成果转化路径对比</h1>
+        <p class="lead">一句话结论：两校都在走“披露/挖掘 → 知识产权 → 评估/熟化 → 许可、转让或作价投资 → 企业化/产业化”的通用链条；差异在于，复旦公开材料更突出上海生态、大学科技园、概念验证和资本平台的协同，清华公开材料更突出技术转移研究院的标准化流程、专业队伍、成果库和多区域产业网络。</p>
+        <div class="abstract-box" aria-label="研究摘要">
+          <strong>摘要</strong>
+          <p>本页以公开政策、高校技术转移机构页面、科技园与新闻材料为证据来源，采用“机构职责 - 流程节点 - 资产处置 - 产业生态”的比较框架，对两校科技成果转化路径进行结构化归纳。</p>
+        </div>
+        <dl class="meta-list">
+          <div class="meta-item"><dt>研究方法</dt><dd>官方来源交叉验证；按同一分析框架重排证据，区分已验证、可推断与待确认。</dd></div>
+          <div class="meta-item"><dt>资料边界</dt><dd>公开网页材料为主，不使用未公开合同、内部统计或非同口径排名。</dd></div>
+          <div class="meta-item"><dt>阅读建议</dt><dd>先看路径图和矩阵，再查证据链；涉及项目数和金额时回到官方最新披露。</dd></div>
+        </dl>
+        <div class="tag-row">
+          <span class="tag green">已验证：两校均有专门技术转移机构</span>
+          <span class="tag blue">可推断：复旦偏生态编排，清华偏流程化平台</span>
+          <span class="tag amber">待确认：复旦最新总体转化金额未见同口径公开数据</span>
+        </div>
+      </div>
+      <aside class="hero-side" aria-label="关键指标">
+        <div class="stamp"><span class="dot"></span> Academic Interactive Report</div>
+        <div class="metric-grid">
+          <div class="metric"><strong>2004</strong><span>复旦大学技术转移中心成立年份，官方称其为学校成果转移转化主要管理部门。</span></div>
+          <div class="metric"><strong>2014</strong><span>清华大学技术转移研究院成立年份，官方称其为领导小组日常办事机构。</span></div>
+          <div class="metric"><strong>773 / 15亿+</strong><span>清华官方页面披露的近五年转化落地成果数与累计转化收益。</span></div>
+        </div>
+      </aside>
+    </header>
+
+    <nav class="nav" aria-label="章节导航">
+      <button class="active" type="button" data-jump="summary">摘要</button>
+      <button type="button" data-jump="paths">路径</button>
+      <button type="button" data-jump="compare">对比</button>
+      <button type="button" data-jump="roles">角色</button>
+      <button type="button" data-jump="evidence">证据</button>
+      <button type="button" data-jump="quiz">小测</button>
+    </nav>
+
+    <main>
+      <section id="summary" class="panel">
+        <div class="panel-header">
+          <div>
+            <h2>可信摘要</h2>
+            <p class="subtitle">把“高校成果转化”拆成治理结构、项目流、资产流、资本与场景四条线看。</p>
+          </div>
+          <span class="tag green">核心链条已由官方来源支撑</span>
+        </div>
+        <div class="grid three">
+          <article class="card strong">
+            <p class="kicker">共性路径</p>
+            <h3>先把成果变成可交易、可合作、可投资的资产</h3>
+            <p>国家法律层面明确了自行实施、转让、许可、合作实施、作价投资等方式；两校公开材料都围绕披露、知识产权、评估、推广、谈判和签约来组织工作。</p>
+          </article>
+          <article class="card">
+            <p class="kicker">复旦画像</p>
+            <h3>技术转移中心牵头，科技园和科创平台补足产业化</h3>
+            <p>复旦侧公开资料强调成果披露系统、知识产权运营专项资金、国家大学科技园、概念验证、场景匹配、资本加速、祖泉研究院和复旦科创等生态节点。</p>
+          </article>
+          <article class="card">
+            <p class="kicker">清华画像</p>
+            <h3>技术转移研究院牵头，标准化流程和专业队伍更清晰</h3>
+            <p>清华侧公开资料把成果披露、知识产权保护、成果孵化、成果转化、成果发布和开放许可分成面向不同对象的服务入口，并披露了较完整的服务流程。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="paths" class="panel">
+        <div class="panel-header">
+          <div>
+            <h2>两校路径图</h2>
+            <p class="subtitle">切换视角，看一项实验室成果如何进入学校治理、市场验证和企业化落地。</p>
+          </div>
+          <div class="segmented" role="group" aria-label="路径视角">
+            <button class="active" type="button" data-lens="standard">标准链条</button>
+            <button type="button" data-lens="fudan">复旦侧重点</button>
+            <button type="button" data-lens="tsinghua">清华侧重点</button>
+          </div>
+        </div>
+        <div class="flow" id="flow"></div>
+      </section>
+
+      <section id="compare" class="panel">
+        <div class="panel-header">
+          <div>
+            <h2>横向对比矩阵</h2>
+            <p class="subtitle">左列是对比维度，中间是复旦，右列是清华。标记“可推断”的地方不要当作官方定论。</p>
+          </div>
+        </div>
+        <div class="compare-table" id="compareTable"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <h2>公开材料密度剖面</h2>
+            <p class="subtitle">这是基于公开材料密度的判断，不是学校真实能力排名。</p>
+          </div>
+          <span class="tag amber">可推断，不作量化排名</span>
+        </div>
+        <div class="grid two">
+          <article class="card">
+            <h3>复旦公开材料呈现出的强项</h3>
+            <div class="bars">
+              <div class="bar-row"><span>上海生态协同</span><div class="bar-track"><div class="bar-fill green" style="--w:92%"></div></div><span>高</span></div>
+              <div class="bar-row"><span>概念验证表达</span><div class="bar-track"><div class="bar-fill green" style="--w:88%"></div></div><span>高</span></div>
+              <div class="bar-row"><span>流程公开颗粒度</span><div class="bar-track"><div class="bar-fill green" style="--w:68%"></div></div><span>中</span></div>
+              <div class="bar-row"><span>总体数据可比性</span><div class="bar-track"><div class="bar-fill green" style="--w:42%"></div></div><span>待补</span></div>
+            </div>
+          </article>
+          <article class="card">
+            <h3>清华公开材料呈现出的强项</h3>
+            <div class="bars">
+              <div class="bar-row"><span>流程标准化</span><div class="bar-track"><div class="bar-fill violet" style="--w:94%"></div></div><span>高</span></div>
+              <div class="bar-row"><span>专业机构清晰度</span><div class="bar-track"><div class="bar-fill violet" style="--w:92%"></div></div><span>高</span></div>
+              <div class="bar-row"><span>转化数据披露</span><div class="bar-track"><div class="bar-fill violet" style="--w:86%"></div></div><span>高</span></div>
+              <div class="bar-row"><span>区域网络广度</span><div class="bar-track"><div class="bar-fill violet" style="--w:84%"></div></div><span>高</span></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <h2>情境化解释</h2>
+            <p class="subtitle">用具体场景理解“路径差异”，比直接比较学校名气更有用。</p>
+          </div>
+        </div>
+        <div class="grid three">
+          <article class="card">
+            <p class="kicker">复旦｜实验室到概念验证</p>
+            <h3>“实验室 - 概念验证 - 产业化”</h3>
+            <p>复旦科技园公开描述了从专利挖掘、商业模式设计到路演融资、产业需求链接的管家式服务，适合解释早期成果怎样跨过“可用但未成产品”的阶段。</p>
+          </article>
+          <article class="card">
+            <p class="kicker">清华｜披露到签约</p>
+            <h3>“披露 - 评估 - 保护 - 推广 - 谈判 - 方案 - 签约/新公司”</h3>
+            <p>清华技术转移院把研究人员入口和产业界入口分开，且公开说明入股和转让项目需资产评估、审批、公示、合同、备案等程序。</p>
+          </article>
+          <article class="card">
+            <p class="kicker">两校共同问题</p>
+            <h3>技术语言和市场语言需要翻译</h3>
+            <p>概念验证中心、技术经理人、产业路演、成果库、开放许可等工具，本质上都在解决“科研成果没人懂、企业需求找不到人、资产价格不好定”的问题。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="roles" class="panel">
+        <div class="panel-header">
+          <div>
+            <h2>角色视角切换</h2>
+            <p class="subtitle">同一套成果转化路径，不同参与者关心的风险点完全不同。</p>
+          </div>
+          <div class="segmented" role="group" aria-label="角色选择">
+            <button class="active" type="button" data-role="researcher">科研团队</button>
+            <button type="button" data-role="enterprise">企业方</button>
+            <button type="button" data-role="investor">投资机构</button>
+            <button type="button" data-role="government">地方政府</button>
+          </div>
+        </div>
+        <div id="roleView" class="role-card"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <h2>可信检查</h2>
+            <p class="subtitle">本页不把公开材料中的宣传性表达直接等同于结果数据。</p>
+          </div>
+        </div>
+        <details open>
+          <summary>已验证</summary>
+          <p>复旦有技术转移中心、成果披露与知识产权管理系统、科技成果公示、国家大学科技园和知识产权运营平台；清华有技术转移研究院、成果披露入口、知识产权保护说明、成果转化说明、成果发布和许可流程入口。</p>
+        </details>
+        <details>
+          <summary>可推断</summary>
+          <p>复旦路径更强调“上海市/杨浦/科技园/概念验证/资本平台”协同，清华路径更强调“技术转移研究院/标准化流程/成果库/校地研究院/产业矩阵”协同。这是基于公开网页呈现密度做出的归纳。</p>
+        </details>
+        <details>
+          <summary>待确认</summary>
+          <p>复旦最新同口径总体转化项目数、转化金额、收益分配总额在本次公开搜索中没有找到可直接与清华“近五年773项、15亿+收益”对比的官方数据，因此页面不做硬性数量排名。</p>
+        </details>
+      </section>
+
+      <section id="evidence" class="panel">
+        <div class="panel-header">
+          <div>
+            <h2>来源与证据链</h2>
+            <p class="subtitle">每条来源都标注它支撑了页面中的哪类判断。</p>
+          </div>
+          <div class="segmented" role="group" aria-label="来源筛选">
+            <button class="active" type="button" data-source-filter="all">全部</button>
+            <button type="button" data-source-filter="fudan">复旦</button>
+            <button type="button" data-source-filter="tsinghua">清华</button>
+            <button type="button" data-source-filter="policy">政策</button>
+          </div>
+        </div>
+        <div class="source-grid" id="sources"></div>
+      </section>
+
+      <section id="quiz" class="panel">
+        <div class="panel-header">
+          <div>
+            <h2>理解检查</h2>
+            <p class="subtitle">检查你是否能用“机构 - 流程 - 资产 - 生态”四层来比较两校路径。</p>
+          </div>
+          <button type="button" class="small-button" id="resetQuiz">重置</button>
+        </div>
+        <div class="quiz-list" id="quizList"></div>
+        <div class="score-board">
+          <div>
+            <p class="kicker">当前得分</p>
+            <div class="score" id="scoreText">0 / 5</div>
+          </div>
+          <p id="scoreHint">完成后会给出掌握建议。</p>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <h2>一页纸学习笔记</h2>
+            <p class="subtitle">下次研究任何高校成果转化，都可以套这个框架。</p>
+          </div>
+          <span class="tag green">knowledge-takeback-skill Note</span>
+        </div>
+        <div class="grid three">
+          <article class="card">
+            <p class="kicker">核心收获</p>
+            <h3>不要先比较学校，先比较链条</h3>
+            <p>看谁发现成果、谁确权、谁评估定价、谁对接市场、谁承担股权和国资流程、谁提供中试/概念验证/资本。</p>
+          </article>
+          <article class="card">
+            <p class="kicker">本次差异</p>
+            <h3>复旦偏生态协同，清华偏流程平台</h3>
+            <p>复旦公开叙事更像“园区、平台、基金、概念验证共同推”；清华公开叙事更像“技术转移院把服务流程标准化并扩大到产业网络”。</p>
+          </article>
+          <article class="card">
+            <p class="kicker">迁移方法</p>
+            <h3>先证据，再结论</h3>
+            <p>官方职责页支撑“谁负责”；服务指南支撑“怎么做”；公示页支撑“是否走程序”；新闻和案例只支撑“曾这样做过”。</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <p class="footer">生成时间：2026-05-31。页面为公开资料研究型整理；涉及交易金额、项目数量、政策状态时，应以后续官方最新披露为准。</p>
+  </div>
+
+  <script>
+    const flows = {
+      standard: {
+        fudan: [
+          ["成果披露/挖掘", "通过成果披露与知识产权管理系统、技术转移中心和院系资源，把实验室成果进入学校管理视野。"],
+          ["知识产权布局", "做专利、软件著作权、集成电路布图设计等管理，强调高价值专利和分类分级。"],
+          ["评估与熟化", "技术转移中心、科技园、概念验证中心、专项资金等共同评估技术成熟度和市场可能性。"],
+          ["对接与交易", "通过许可、转让、作价入股、校企联合实验室、供需对接平台等方式形成合作。"],
+          ["产业化生态", "国家大学科技园、祖泉研究院、复旦科创、地方政府和资本平台参与企业孵化与产业落地。"]
+        ],
+        tsinghua: [
+          ["成果披露", "科研人员可通过技术转移信息系统披露成果；技术转移院介入商业化可能性判断。"],
+          ["知识产权保护", "围绕专利、软件著作权、技术秘密做保护和布局，明确职务发明权属。"],
+          ["评估与熟化", "技术转移院协同相关部门做成果评估、知识产权保护、市场推广和商务谈判。"],
+          ["审批与签约", "形成转化方案后，完成资产评估、公示、审批、合同、备案等程序。"],
+          ["跟踪与收益", "签约或投资成立新公司后，继续做履约、企业发展服务、收益分配和生态协同。"]
+        ]
+      },
+      fudan: {
+        fudan: [
+          ["技术转移中心", "2004年成立，官方称其为学校成果转移转化主要管理部门。"],
+          ["成果披露系统", "系统覆盖成果披露、专利申请、软件著作权、集成电路布图设计等模块。"],
+          ["科技园和概念验证", "复旦科技园强调“实验室 - 概念验证 - 产业化”的链条。"],
+          ["平台与资本", "知识产权运营转化公共服务平台、复旦科创基金、祖泉研究院等增强外部连接。"],
+          ["产业落地", "围绕生物医药、人工智能、新材料等方向形成项目池、路演、企业和政府合作。"]
+        ],
+        tsinghua: [
+          ["对照观察", "清华路径不是本视角重点。可以把它看成更集中、更流程化的参照样本。"],
+          ["对照观察", "清华对成果披露、知识产权保护、成果孵化、转化和许可流程的页面分工更明确。"],
+          ["对照观察", "清华公开披露的近五年项目数和转化收益提供了较强的数据锚点。"],
+          ["对照观察", "清华地方院和派出院网络在公开材料中呈现得更广。"],
+          ["对照观察", "对外合作时，清华适合先查成果库和技术转移院入口。"]
+        ]
+      },
+      tsinghua: {
+        fudan: [
+          ["对照观察", "复旦路径不是本视角重点。可以把它看成更强调城市创新生态和概念验证的平台样本。"],
+          ["对照观察", "复旦公开材料中的科技园、复旦科创、祖泉研究院说明其正在补强早期孵化与资本衔接。"],
+          ["对照观察", "复旦有成果披露系统和供需对接平台，但本次未找到同口径总体转化金额。"],
+          ["对照观察", "复旦适合从上海产业场景、医疗健康和AI等方向切入成果对接。"],
+          ["对照观察", "项目方仍应先回到技术转移中心确认权属、披露和交易流程。"]
+        ],
+        tsinghua: [
+          ["技术转移研究院", "2014年成立，是知识产权管理与成果转化领导小组的日常办事机构。"],
+          ["面向对象分流", "对研究人员、产业界、创业团队分别设置成果披露、成果发布、许可流程、创业指南等入口。"],
+          ["九步服务体系", "公开材料将服务拆为技术挖掘、技术评估、知识产权、技术熟化、推广、谈判、审批签约、跟踪服务、收益分配。"],
+          ["规则化处置", "2022年材料披露不同处置形式、金额区间和决策机关，对流程时间有较明确示意。"],
+          ["产业矩阵", "近年数据、AI领域“先许可后入股”、技术转移硕士项目和地方院网络形成转化外部支撑。"]
+        ]
+      }
+    };
+
+    const compareRows = [
+      ["组织架构", "技术转移中心是主要管理部门；科技园、资产经营公司、科研院、祖泉研究院和复旦科创等构成协同生态。", "技术转移研究院是领导小组日常办事机构，负责学校科技成果转化及知识产权管理。"],
+      ["成果发现", "成果披露与知识产权管理系统覆盖披露、专利、软著、集成电路布图设计；拟转化成果按领域发布。", "科研人员通过技术转移信息系统做成果披露；技术转移院用商业化可能性、产业问题、市场容量等问题做初判。"],
+      ["知识产权", "强调高质量知识产权挖掘、培育、专利导航布局、分级分类、申请维护和市场化运营。", "公开说明专利、软件著作权、技术秘密的保护方式，强调清晰权属降低商业化法律风险。"],
+      ["评估定价", "公开职责包括科技成果评价、市场调研、法律协议谈判；上海条例要求协议定价、挂牌或拍卖等方式。", "公开流程包含成果评估、资产评估、审批、公示、合同和备案；2022材料细化处置形式和决策层级。"],
+      ["转化方式", "许可、转让、作价入股、校企联合实验室、供需对接、概念验证和产业化平台协同。", "许可、转让、技术投资、发起成立公司、增资或换股既存企业，以及专利开放许可等。"],
+      ["生态资源", "更突出上海市、杨浦、国家大学科技园、概念验证、未来产业基金、复旦科创和祖泉研究院。", "更突出技术转移院、成果库、地方院/派出院、X-lab、校友三创、投资基金和产业矩阵。"],
+      ["公开数据", "有科技园运营面积、在孵企业等园区数据，以及项目/平台案例；本次未见最新全校同口径转化金额。", "官方页面披露近五年773项、累计转化收益15亿元以上；新闻披露近三年393项、近14亿元。"],
+      ["适合切入", "适合从上海产业场景、概念验证、医疗健康、AI、新材料和资本孵化生态切入。", "适合从成果库、标准化许可/转让流程、AI/医药健康/高端装备等战略产业方向切入。"]
+    ];
+
+    const roles = {
+      researcher: {
+        title: "科研团队怎么看",
+        text: "第一步不是找投资人，而是确认成果是否完成披露、权属是否清楚、是否需要专利/软著/技术秘密保护。",
+        points: ["复旦团队可优先联系技术转移中心，并关注概念验证、专项资金、科技园和复旦科创生态。", "清华团队可先走成果披露系统，再与技术转移院讨论评估、保护、市场推广和转化方案。", "共同注意：作价投资和转让往往需要评估、公示、审批与合同程序，不能绕过学校权属。"]
+      },
+      enterprise: {
+        title: "企业方怎么看",
+        text: "企业不是只买一项专利，更是在买权属清晰、可实施、可迭代、可持续合作的技术能力。",
+        points: ["复旦侧可以通过供需对接、科技园和公共专利平台寻找匹配成果。", "清华侧可以从成果发布、成果库和许可流程入口查找健康、能源、智造、信息等分类成果。", "共同注意：早期成果要看技术成熟度、样机/中试状态、发明人持续参与程度和知识产权边界。"]
+      },
+      investor: {
+        title: "投资机构怎么看",
+        text: "投资人关心的是技术资产能否变成公司价值：团队、股权、治理、市场验证、退出路径都比论文更重要。",
+        points: ["复旦公开材料中的祖泉研究院、复旦科创基金和F-LAB更接近早期项目培育与资本链接。", "清华公开材料强调项目负责制、投资入股、初创公司股权结构和企业发展跟踪。", "共同注意：高校作价投资形成股权时，国资、定价、公示、收益分配和教师兼职合规都要前置核查。"]
+      },
+      government: {
+        title: "地方政府怎么看",
+        text: "地方政府要看的不是单个成果，而是高校能否形成“成果池 - 技术经理人 - 概念验证 - 中试 - 场景 - 企业”的连续供给。",
+        points: ["上海政策和复旦生态更强调概念验证平台、大学科技园、未来产业基金和区域产业场景。", "北京政策和清华路径更强调首都高校转化、赋权改革、团队专员、大学科技园重塑和京津冀落地。", "共同注意：政策资源应绑定成果转化量、孵化企业数、在地转化成效和长期产业贡献。"]
+      }
+    };
+
+    const sources = [
+      {
+        group: "policy",
+        title: "中华人民共和国促进科技成果转化法",
+        url: "https://www.most.gov.cn/ztzl/gjkxjsjldh/jldh2019/jldh19xgwj/202001/t20200106_150944.html",
+        support: "支撑通用路径：自行实施、转让、许可、合作实施、作价投资；高校可自主决定转让、许可或作价投资并需定价、公示。"
+      },
+      {
+        group: "fudan",
+        title: "复旦大学技术转移中心：中心简介",
+        url: "https://fdzhuanyi.fudan.edu.cn/7c/19/c40938a490521/page.htm",
+        support: "支撑复旦技术转移中心成立时间、主要管理部门定位、知识产权和成果转化服务能力。"
+      },
+      {
+        group: "fudan",
+        title: "复旦大学科学技术研究院：技术转移中心职能",
+        url: "https://ist.fudan.edu.cn/Data/View/3276",
+        support: "支撑复旦技术转移中心负责政策制度、成果挖掘、培育、转让、许可、作价投资、概念验证和中试平台。"
+      },
+      {
+        group: "fudan",
+        title: "复旦大学技术转移中心：成果披露与知识产权管理系统",
+        url: "https://fdzhuanyi.fudan.edu.cn/9c/8f/c41136a498831/page.htm",
+        support: "支撑复旦成果披露、专利申请、软著、集成电路布图设计等模块。"
+      },
+      {
+        group: "fudan",
+        title: "复旦大学国家大学科技园：技术成果转化",
+        url: "https://www.fudanusp.com/solutions/18.html",
+        support: "支撑复旦科技园与资产经营公司、科研院共建技术转移中心，以及“实验室 - 概念验证 - 产业化”路径。"
+      },
+      {
+        group: "fudan",
+        title: "复旦大学知识产权运营转化公共服务平台上线",
+        url: "https://www.fudanusp.com/news/736.html",
+        support: "支撑复旦公开专利展示、全文下载和需求留言对接机制。"
+      },
+      {
+        group: "fudan",
+        title: "复旦科创大会与祖泉研究院",
+        url: "https://news.fudan.edu.cn/2025/1203/c31a147599/page.htm",
+        support: "支撑复旦重大成果转化平台、科学家合伙人、功能平台、科创基金和生态扩容。"
+      },
+      {
+        group: "tsinghua",
+        title: "清华大学技术转移院：机构概况",
+        url: "https://ott.tsinghua.edu.cn/gywm/jggk.htm",
+        support: "支撑清华技术转移研究院成立时间、领导小组日常办事机构定位和知识产权/成果转化职责。"
+      },
+      {
+        group: "tsinghua",
+        title: "清华大学技术转移院：成果披露",
+        url: "https://ott.tsinghua.edu.cn/mxyjry/cgpl.htm",
+        support: "支撑清华成果披露入口、商业化初判问题，以及资产评估、审批、公示、合同、备案程序。"
+      },
+      {
+        group: "tsinghua",
+        title: "清华大学技术转移院：知识产权保护",
+        url: "https://ott.tsinghua.edu.cn/mxyjry/zscqbh.htm",
+        support: "支撑专利、软件著作权、技术秘密保护，以及专利可转让、许可、投资入股。"
+      },
+      {
+        group: "tsinghua",
+        title: "清华大学技术转移院：成果转化",
+        url: "https://ott.tsinghua.edu.cn/mxyjry/cgzh.htm",
+        support: "支撑清华从成果披露到评估、保护、推广、谈判、方案、签约或投资成立新公司的流程。"
+      },
+      {
+        group: "tsinghua",
+        title: "清华大学官网：技术转移",
+        url: "https://www.tsinghua.edu.cn/kxyj/jszy.htm",
+        support: "支撑清华全链条转化模式、领导小组统筹、近五年773项成果与15亿元以上转化收益。"
+      },
+      {
+        group: "tsinghua",
+        title: "清华大学新闻：近三年成果转化数据",
+        url: "https://www.tsinghua.edu.cn/info/1182/125142.htm",
+        support: "支撑近三年393项、近14亿元，以及AI领域“先许可、后入股”等模式探索。"
+      },
+      {
+        group: "policy",
+        title: "北京市教委：促进首都高校科技成果转化若干措施",
+        url: "https://jw.beijing.gov.cn/xxgk/2024zcwj/2024qtwj/202604/t20260403_4574531.html",
+        support: "支撑北京侧赋权、概念验证、大学科技园、技术经理人、收益分配和校地企协同政策环境。"
+      },
+      {
+        group: "policy",
+        title: "上海市科委：上海市促进科技成果转化条例",
+        url: "https://stcsm.sh.gov.cn/zwgk/kjzc/zcwj/flfg/20210521/03cbe685fdd54576875c9072870e42e2.html",
+        support: "支撑上海侧定价、作价投资、企业需求、资本支持、协同创新平台和年度报告制度。"
+      }
+    ];
+
+    const quiz = [
+      {
+        question: "1. 比较高校成果转化路径时，第一步最好看什么？",
+        options: ["学校名气", "机构和流程证据", "宣传标题"],
+        answer: 1,
+        explain: "对。先看谁负责、怎么披露、怎么确权、怎么交易，再做路径判断。"
+      },
+      {
+        question: "2. 本页对复旦路径的核心归纳是？",
+        options: ["只做论文发表", "技术转移中心牵头，科技园/概念验证/资本生态协同", "没有成果披露系统"],
+        answer: 1,
+        explain: "对。复旦公开材料更突出技术转移中心与上海生态、科技园和资本平台的协同。"
+      },
+      {
+        question: "3. 本页对清华路径的核心归纳是？",
+        options: ["流程化技术转移院和成果库/产业网络", "没有知识产权管理", "只靠学生创业"],
+        answer: 0,
+        explain: "对。清华公开材料更清楚地展示技术转移院和标准化流程。"
+      },
+      {
+        question: "4. 为什么不能直接用清华转化金额去压复旦？",
+        options: ["金额不重要", "本次未找到复旦同口径最新总量数据", "复旦不做转化"],
+        answer: 1,
+        explain: "对。没有同口径数据时，不能硬做数量排名。"
+      },
+      {
+        question: "5. 一项高校成果作价投资通常需要重点核查什么？",
+        options: ["权属、评估、公示、审批、收益分配", "只看论文引用", "只看团队人数"],
+        answer: 0,
+        explain: "对。作价投资涉及资产、股权和国资合规，前置核查很关键。"
+      }
+    ];
+
+    function renderFlow(lens) {
+      const data = flows[lens];
+      const flow = document.getElementById("flow");
+      flow.innerHTML = "";
+      [["复旦大学", data.fudan, "green"], ["清华大学", data.tsinghua, "violet"]].forEach(([name, steps, color]) => {
+        const lane = document.createElement("article");
+        lane.className = "flow-lane";
+        const title = document.createElement("div");
+        title.className = "lane-title";
+        title.innerHTML = `<strong>${name}</strong><span class="tag ${color}">${lens === "standard" ? "标准链条" : "视角对照"}</span>`;
+        const path = document.createElement("div");
+        path.className = "path";
+        steps.forEach(([heading, text], index) => {
+          const item = document.createElement("div");
+          item.className = "path-step";
+          item.innerHTML = `<div class="num">${index + 1}</div><div><div class="step-title">${heading}</div><div class="step-text">${text}</div></div>`;
+          path.appendChild(item);
+        });
+        lane.appendChild(title);
+        lane.appendChild(path);
+        flow.appendChild(lane);
+      });
+    }
+
+    function renderCompare() {
+      const table = document.getElementById("compareTable");
+      table.innerHTML = "";
+      const head = document.createElement("div");
+      head.className = "compare-row compare-head";
+      head.innerHTML = "<div>维度</div><div>复旦大学</div><div>清华大学</div>";
+      table.appendChild(head);
+      compareRows.forEach((row) => {
+        const el = document.createElement("div");
+        el.className = "compare-row";
+        el.innerHTML = row.map((cell) => `<div class="compare-cell">${cell}</div>`).join("");
+        table.appendChild(el);
+      });
+    }
+
+    function renderRole(key) {
+      const data = roles[key];
+      document.getElementById("roleView").innerHTML = `<h3>${data.title}</h3><p>${data.text}</p><ul>${data.points.map((p) => `<li>${p}</li>`).join("")}</ul>`;
+    }
+
+    function renderSources(filter = "all") {
+      const target = document.getElementById("sources");
+      target.innerHTML = "";
+      sources.filter((item) => filter === "all" || item.group === filter).forEach((item) => {
+        const card = document.createElement("article");
+        card.className = "source-card";
+        const tagClass = item.group === "fudan" ? "green" : item.group === "tsinghua" ? "violet" : "blue";
+        card.innerHTML = `<div class="tag ${tagClass}">${item.group}</div><h3>${item.title}</h3><p>${item.support}</p><div class="source-meta">来源类型：${item.group === "policy" ? "政策/法规" : "学校或机构官方"}</div><a href="${item.url}" target="_blank" rel="noreferrer">打开来源</a>`;
+        target.appendChild(card);
+      });
+    }
+
+    const answers = new Map();
+    function renderQuiz() {
+      const list = document.getElementById("quizList");
+      list.innerHTML = "";
+      answers.clear();
+      quiz.forEach((item, questionIndex) => {
+        const card = document.createElement("article");
+        card.className = "quiz-card";
+        const question = document.createElement("p");
+        question.textContent = item.question;
+        const choices = document.createElement("div");
+        choices.className = "choice";
+        const feedback = document.createElement("div");
+        feedback.className = "feedback";
+        feedback.textContent = "请选择一个答案。";
+        item.options.forEach((option, optionIndex) => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.textContent = option;
+          button.addEventListener("click", () => {
+            choices.querySelectorAll("button").forEach((choice) => choice.classList.remove("selected"));
+            button.classList.add("selected");
+            const good = optionIndex === item.answer;
+            answers.set(questionIndex, good);
+            feedback.className = `feedback ${good ? "good" : "bad"}`;
+            feedback.textContent = good ? item.explain : `还差一点。正确判断：${item.options[item.answer]}。`;
+            updateScore();
+          });
+          choices.appendChild(button);
+        });
+        card.appendChild(question);
+        card.appendChild(choices);
+        card.appendChild(feedback);
+        list.appendChild(card);
+      });
+      updateScore();
+    }
+
+    function updateScore() {
+      let score = 0;
+      answers.forEach((good) => { if (good) score += 1; });
+      document.getElementById("scoreText").textContent = `${score} / ${quiz.length}`;
+      const hint = document.getElementById("scoreHint");
+      if (answers.size < quiz.length) hint.textContent = `已完成 ${answers.size} 题。`;
+      else if (score === quiz.length) hint.textContent = "已经能按证据链比较两校路径。";
+      else if (score >= 3) hint.textContent = "大方向已掌握，建议重看横向矩阵。";
+      else hint.textContent = "建议先回到路径图，重新理解机构、流程、资产和生态。";
+    }
+
+    document.querySelectorAll("[data-jump]").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll("[data-jump]").forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+        document.getElementById(button.dataset.jump).scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+
+    document.querySelectorAll("[data-lens]").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll("[data-lens]").forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+        renderFlow(button.dataset.lens);
+      });
+    });
+
+    document.querySelectorAll("[data-role]").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll("[data-role]").forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+        renderRole(button.dataset.role);
+      });
+    });
+
+    document.querySelectorAll("[data-source-filter]").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll("[data-source-filter]").forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+        renderSources(button.dataset.sourceFilter);
+      });
+    });
+
+    document.getElementById("resetQuiz").addEventListener("click", renderQuiz);
+    renderFlow("standard");
+    renderCompare();
+    renderRole("researcher");
+    renderSources("all");
+    renderQuiz();
+  </script>
+</body>
+</html>
