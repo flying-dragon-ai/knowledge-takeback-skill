@@ -28,7 +28,7 @@ This repository is the installable `knowledge-takeback-skill` package for the kn
 
 - `examples/` — checked-in generated HTML and `.ahtml` artifact examples.
 - `local/` — ignored local learner state, scratch artifacts, and imported source drops.
-- `knowledge-takeback-skill/`, `knowledge-takeback-skill-notes/`, `knowledge-takeback-skill-log.md`, `knowledge-takeback-skill-config.md`, `fishing/` — ignored legacy or user-selected knowledge-takeback-skill storage locations.
+- `local/`, `knowledge-takeback-skill-notes/`, `knowledge-takeback-skill-artifacts/`, `knowledge-takeback-skill-log.md`, `knowledge-takeback-skill-config.md`, `fishing/` — ignored legacy or user-selected knowledge-takeback-skill storage locations.
 
 ## Placement Rules
 

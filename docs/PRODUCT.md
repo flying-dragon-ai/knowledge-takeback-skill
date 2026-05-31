@@ -2,7 +2,7 @@
 
 ## Positioning
 
-knowledge-takeback-skill packages knowledge-takeback-skill as a learning layer for AI-assisted work. Its product promise is:
+knowledge-takeback-skill is a learning layer for AI-assisted work. Its product promise is:
 
 > Do not only let AI complete the task. Help the user understand why it worked and how to do a similar task next time.
 
@@ -42,4 +42,4 @@ The root `SKILL.md` is a discovery wrapper. The authoritative workflow lives in 
 
 The copied poster-oriented `assets/` and legacy visual references are retained as optional Vision+ and fixed-export resources. knowledge-takeback-skill Artifact DSL is the primary structured artifact path.
 
-Generated learning pages belong in `examples/`. Product, handoff, and maintenance notes belong in `docs/`. Local learner state belongs under a user-selected knowledge-takeback-skill storage root and is ignored when it is placed in `local/`, `knowledge-takeback-skill/`, `knowledge-takeback-skill-notes/`, or legacy `fishing/`.
+Generated learning pages belong in `examples/`. Product, handoff, and maintenance notes belong in `docs/`. Local learner state belongs under a user-selected knowledge-takeback-skill storage root and is ignored when it is placed in `local/`, `knowledge-takeback-skill-notes/`, `knowledge-takeback-skill-artifacts/`, or legacy `fishing/`.
