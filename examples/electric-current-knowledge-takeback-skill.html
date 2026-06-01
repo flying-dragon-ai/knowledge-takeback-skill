@@ -573,6 +573,211 @@
       color: #334155;
     }
 
+    .circuit3d {
+      display: grid;
+      grid-template-columns: minmax(250px, .78fr) minmax(0, 1.22fr);
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .circuit3d-controls {
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+
+    .circuit3d-panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcfe;
+      padding: 12px;
+    }
+
+    .circuit3d-panel strong {
+      display: block;
+      margin-bottom: 9px;
+      color: #334155;
+      font-size: 13px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    .circuit3d-choice {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .circuit3d-btn {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--ink);
+      padding: 8px 10px;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    .circuit3d-btn.active {
+      background: #1e293b;
+      color: #fff;
+      border-color: #1e293b;
+    }
+
+    .circuit3d-panel label {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    .circuit3d-stage {
+      position: relative;
+      min-height: 380px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: radial-gradient(circle at 46% 18%, #fff, #eef4fb 44%, #d7e0ec 100%);
+      overflow: hidden;
+      perspective: 1050px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.75);
+    }
+
+    .circuit3d-world {
+      position: absolute;
+      inset: 52px 38px 98px;
+      transform-style: preserve-3d;
+      transform: rotateX(62deg) rotateZ(-27deg);
+      transition: transform 240ms ease;
+    }
+
+    .circuit3d-loop {
+      position: absolute;
+      inset: 12% 7%;
+      border: 28px solid #b97a2d;
+      border-radius: 72px;
+      transform: translateZ(0);
+      box-shadow: 0 28px 38px rgba(83, 49, 13, .2), inset 0 10px 18px rgba(255,255,255,.28), inset 0 -10px 18px rgba(79,43,8,.2);
+    }
+
+    .circuit3d-battery,
+    .circuit3d-bulb,
+    .circuit3d-electron,
+    .circuit3d-field {
+      position: absolute;
+      transform-style: preserve-3d;
+    }
+
+    .circuit3d-battery {
+      left: 6%;
+      top: 35%;
+      width: 76px;
+      height: 42px;
+      border: 2px solid #1e293b;
+      border-radius: 8px;
+      background: linear-gradient(90deg, var(--blue-soft), #fff, var(--red-soft));
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      transform: translateZ(40px);
+      box-shadow: 0 14px 22px rgba(15,23,42,.15);
+    }
+
+    .circuit3d-bulb {
+      right: 10%;
+      top: 30%;
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fff8c7, #ffc94d 55%, #c98200);
+      transform: translateZ(44px);
+      box-shadow: 0 0 28px rgba(255,201,77,.72), 0 14px 24px rgba(15,23,42,.18);
+    }
+
+    .circuit3d-stage[data-energy="off"] .circuit3d-bulb {
+      background: radial-gradient(circle, #f8fafc, #d7dee8 62%, #94a3b8);
+      box-shadow: 0 12px 18px rgba(15,23,42,.16);
+    }
+
+    .circuit3d-electron {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: var(--blue);
+      font-weight: 900;
+      font-size: 13px;
+      box-shadow: 0 10px 18px rgba(36,87,197,.28);
+      animation: circuit3dMove var(--circuit-speed, 5.6s) linear infinite;
+      animation-delay: var(--delay, 0s);
+      offset-path: path("M 50 130 C 50 40, 330 40, 330 130 C 330 230, 50 230, 50 130");
+    }
+
+    .circuit3d-field {
+      left: 14%;
+      right: 14%;
+      top: 50%;
+      height: 9px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, rgba(36,87,197,.72), transparent);
+      transform: translateZ(52px);
+      animation: circuit3dField 2.3s linear infinite;
+      opacity: .78;
+    }
+
+    .circuit3d-stage[data-energy="off"] .circuit3d-electron,
+    .circuit3d-stage[data-energy="off"] .circuit3d-field { animation-play-state: paused; opacity: .28; }
+    .circuit3d-stage[data-energy="high"] .circuit3d-electron { --circuit-speed: 3.2s; }
+    .circuit3d-stage[data-energy="slow"] .circuit3d-electron { --circuit-speed: 7.6s; }
+
+    @keyframes circuit3dMove {
+      from { offset-distance: 0%; transform: translateZ(48px); }
+      to { offset-distance: 100%; transform: translateZ(48px); }
+    }
+
+    @keyframes circuit3dField {
+      from { clip-path: inset(0 95% 0 0); }
+      to { clip-path: inset(0 0 0 95%); }
+    }
+
+    .circuit3d-hud {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 14px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .circuit3d-card {
+      border: 1px solid rgba(36,87,197,.16);
+      border-radius: 8px;
+      background: rgba(255,255,255,.88);
+      padding: 10px;
+      backdrop-filter: blur(8px);
+    }
+
+    .circuit3d-card span {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .circuit3d-card p {
+      margin: 0;
+      color: #334155;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
     .calc-grid {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(300px, 0.9fr);
@@ -742,7 +947,9 @@
       .grid.two,
       .material-stage,
       .calc-grid,
-      .source-grid {
+      .source-grid,
+      .circuit3d,
+      .circuit3d-hud {
         grid-template-columns: 1fr;
       }
 
@@ -890,6 +1097,53 @@
         <div class="trace-line">
           <div class="trace-step">03 内化</div>
           <div class="trace-box">可迁移规则：先问“哪个介质？”再问“哪些带电粒子能动？”最后再判断“载流子方向”和“传统电流方向”。</div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title">3D 闭合电路仿真</h2>
+            <p class="panel-subtitle">把电池、导线、灯泡和电子漂移放进同一个可操作模型：闭合后电场快速建立，电子沿回路集体缓慢漂移。</p>
+          </div>
+          <span class="tag blue">3D model · teaching scale</span>
+        </div>
+        <div class="circuit3d">
+          <div class="circuit3d-controls">
+            <div class="circuit3d-panel">
+              <strong>电路状态</strong>
+              <div class="circuit3d-choice" aria-label="电路状态选择">
+                <button class="circuit3d-btn" type="button" data-circuit="off">断开</button>
+                <button class="circuit3d-btn active" type="button" data-circuit="slow">闭合低电流</button>
+                <button class="circuit3d-btn" type="button" data-circuit="high">闭合高电流</button>
+              </div>
+            </div>
+            <div class="circuit3d-panel">
+              <strong>观察重点</strong>
+              <div class="circuit3d-choice" aria-label="观察重点选择">
+                <button class="circuit3d-btn active" type="button" data-focus3d="electron">看电子</button>
+                <button class="circuit3d-btn" type="button" data-focus3d="field">看电场</button>
+                <button class="circuit3d-btn" type="button" data-focus3d="energy">看灯泡</button>
+              </div>
+            </div>
+            <div class="circuit3d-panel">
+              <label for="circuitTilt"><span>模型倾角</span><strong id="circuitTiltLabel">62°</strong></label>
+              <input id="circuitTilt" type="range" min="48" max="70" step="1" value="62">
+            </div>
+          </div>
+          <div class="circuit3d-stage" id="circuit3dStage" data-energy="slow" aria-label="3D 闭合电路仿真模型">
+            <div class="circuit3d-world" id="circuit3dWorld">
+              <div class="circuit3d-loop"></div>
+              <div class="circuit3d-battery">电池</div>
+              <div class="circuit3d-bulb"></div>
+              <div class="circuit3d-field"></div>
+            </div>
+            <div class="circuit3d-hud" aria-live="polite">
+              <div class="circuit3d-card"><span>电子</span><p id="circuitElectronText">电子沿金属回路缓慢漂移。</p></div>
+              <div class="circuit3d-card"><span>电场</span><p id="circuitFieldText">闭合电路后，电场影响迅速传遍回路。</p></div>
+              <div class="circuit3d-card"><span>灯泡</span><p id="circuitBulbText">能量在灯丝处转化为光和热。</p></div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -1128,6 +1382,58 @@
 
   <script>
     const ELEMENTARY_CHARGE = 1.602176634e-19;
+
+    const circuit3dStage = document.getElementById("circuit3dStage");
+    const circuit3dWorld = document.getElementById("circuit3dWorld");
+    const circuitElectronText = document.getElementById("circuitElectronText");
+    const circuitFieldText = document.getElementById("circuitFieldText");
+    const circuitBulbText = document.getElementById("circuitBulbText");
+    const circuitTilt = document.getElementById("circuitTilt");
+    const circuitTiltLabel = document.getElementById("circuitTiltLabel");
+    const circuitCopy = {
+      off: ["断开时没有持续闭合通路，电子不形成稳定环流。", "电场不能驱动完整回路中的持续电流。", "灯泡不亮，因为能量无法连续送到灯丝。"],
+      slow: ["电子沿金属回路缓慢漂移。", "闭合电路后，电场影响迅速传遍回路。", "能量在灯丝处转化为光和热。"],
+      high: ["单位时间通过截面的电荷更多，动画加快表示电流更大。", "电场建立仍远快于单个电子漂移。", "灯泡更亮只是教学示意，真实亮度还取决于电阻和功率。"]
+    };
+
+    for (let i = 0; i < 10; i += 1) {
+      const electron = document.createElement("span");
+      electron.className = "circuit3d-electron";
+      electron.textContent = "−";
+      electron.style.setProperty("--delay", `${-i * .55}s`);
+      circuit3dWorld.appendChild(electron);
+    }
+
+    document.querySelectorAll("[data-circuit]").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll("[data-circuit]").forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+        const key = button.dataset.circuit;
+        circuit3dStage.dataset.energy = key;
+        const copy = circuitCopy[key];
+        circuitElectronText.textContent = copy[0];
+        circuitFieldText.textContent = copy[1];
+        circuitBulbText.textContent = copy[2];
+      });
+    });
+
+    document.querySelectorAll("[data-focus3d]").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll("[data-focus3d]").forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+        const focus = button.dataset.focus3d;
+        circuit3dWorld.style.transform = focus === "field"
+          ? "rotateX(58deg) rotateZ(-20deg) scale(1.05)"
+          : focus === "energy"
+            ? "rotateX(56deg) rotateZ(-34deg) scale(1.06)"
+            : `rotateX(${circuitTilt.value}deg) rotateZ(-27deg)`;
+      });
+    });
+
+    circuitTilt.addEventListener("input", () => {
+      circuitTiltLabel.textContent = `${circuitTilt.value}°`;
+      circuit3dWorld.style.transform = `rotateX(${circuitTilt.value}deg) rotateZ(-27deg)`;
+    });
 
     const wire = document.getElementById("wire");
     for (let i = 0; i < 12; i += 1) {

@@ -18,7 +18,34 @@
     .steps { display: grid; gap: 8px; margin-top: 10px; }
     .step { border-left: 4px solid #2f6f4e; background: #f6faf6; padding: 9px 10px; border-radius: 0 8px 8px 0; }
     .tag { display: inline-flex; border: 1px solid #c7b98f; border-radius: 999px; padding: 3px 8px; margin: 4px 4px 0 0; background: #fff8dc; font-size: 12px; font-weight: 800; }
-    @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } h1 { font-size: 25px; } }
+    .sim-panel { display: grid; grid-template-columns: minmax(250px, .85fr) minmax(0, 1.15fr); gap: 16px; align-items: stretch; }
+    .sim-controls { display: grid; gap: 10px; align-content: start; }
+    .sim-btn { border: 1px solid #cfc6a9; border-radius: 10px; background: #faf8ef; color: #1f2933; padding: 11px 12px; font: inherit; font-weight: 850; text-align: left; cursor: pointer; transition: transform 160ms ease, border-color 160ms ease, background 160ms ease; }
+    .sim-btn:hover { transform: translateY(-1px); border-color: #2f6f4e; }
+    .sim-btn.active { background: #2f6f4e; border-color: #2f6f4e; color: #fff; }
+    .sim-btn span { display: block; margin-top: 3px; font-size: 12px; line-height: 1.45; opacity: .78; }
+    .depth-control { border: 1px solid #e5e0d2; border-radius: 10px; background: #fffefa; padding: 12px; }
+    .depth-control label { display: grid; grid-template-columns: 1fr auto; gap: 8px; color: #4b5563; font-size: 13px; font-weight: 850; }
+    .depth-control input { width: 100%; margin-top: 10px; accent-color: #2f6f4e; }
+    .pond-stage { position: relative; min-height: 370px; border: 1px solid #d8d6cc; border-radius: 14px; background: linear-gradient(180deg, #eef8f4, #d8eadf 42%, #c9b083); overflow: hidden; perspective: 980px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.45); }
+    .pond-world { position: absolute; inset: 24px 28px 38px; transform-style: preserve-3d; transform: rotateX(58deg) rotateZ(-26deg); transition: transform 320ms ease; }
+    .pond-stage[data-view="underwater"] .pond-world { transform: rotateX(64deg) rotateZ(-16deg) translateY(8px); }
+    .pond-stage[data-view="strike"] .pond-world { transform: rotateX(52deg) rotateZ(-34deg) scale(1.04); }
+    .pond-plane { position: absolute; inset: 0; border-radius: 28px; transform-style: preserve-3d; }
+    .pond-bed { background: repeating-linear-gradient(112deg, rgba(91,64,34,.16) 0 14px, rgba(255,255,255,.12) 14px 25px), linear-gradient(135deg, #b99355, #8d6b3f); transform: translateZ(-36px); box-shadow: 0 24px 44px rgba(70, 47, 20, .24); }
+    .pond-water { background: linear-gradient(135deg, rgba(84,151,135,.22), rgba(202,238,228,.34)); border: 1px solid rgba(61, 117, 94, .18); transform: translateZ(18px); backdrop-filter: blur(2px); }
+    .fish, .bait, .nest, .reed { position: absolute; transform-style: preserve-3d; }
+    .fish { width: 34px; height: 14px; border-radius: 999px 70% 70% 999px; background: #355e4b; box-shadow: 0 7px 14px rgba(23, 32, 51, .2); transition: left 280ms ease, top 280ms ease, transform 280ms ease; }
+    .fish::after { content: ""; position: absolute; right: -8px; top: 2px; border-left: 10px solid #355e4b; border-top: 5px solid transparent; border-bottom: 5px solid transparent; }
+    .bait { width: 18px; height: 18px; border-radius: 50%; background: #d69c2f; border: 2px solid #fff5cc; box-shadow: 0 0 0 8px rgba(214,156,47,.16), 0 15px 25px rgba(31,41,51,.2); transition: left 260ms ease, top 260ms ease, transform 260ms ease; }
+    .nest { width: 92px; height: 58px; border-radius: 50%; background: radial-gradient(circle, rgba(255,216,107,.55), rgba(153,110,44,.2) 58%, transparent 70%); transform: translateZ(-10px); }
+    .reed { width: 9px; height: 86px; border-radius: 999px; background: linear-gradient(#4f8d54, #285b35); transform-origin: bottom center; box-shadow: 14px 8px 0 -2px rgba(57,117,58,.8), 28px -3px 0 -3px rgba(57,117,58,.75); }
+    .rod-line { position: absolute; left: 63%; top: -16%; width: 2px; height: 170px; background: rgba(31,41,51,.55); transform: translateZ(55px) rotateX(-36deg); transform-origin: top; }
+    .pond-hud { position: absolute; left: 14px; right: 14px; bottom: 12px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .hud-card { border: 1px solid rgba(47,111,78,.2); border-radius: 10px; background: rgba(255,254,250,.86); padding: 9px; backdrop-filter: blur(8px); }
+    .hud-card strong { display: block; color: #2f6f4e; font-size: 12px; margin-bottom: 3px; }
+    .hud-card p { margin: 0; color: #384336; font-size: 13px; line-height: 1.45; }
+    @media (max-width: 760px) { .grid, .sim-panel, .pond-hud { grid-template-columns: 1fr; } h1 { font-size: 25px; } .pond-stage { min-height: 430px; } }
   </style>
 </head>
 <body>
@@ -56,11 +83,126 @@
     </section>
 
     <section>
+      <h2>3D 仿真：鱼路、窝点与逗法</h2>
+      <p>切换阶段，观察“先离窝试探、再控饵触发、最后少量补窝”的节奏。模型是教学化示意，不替代现场鱼情判断。</p>
+      <div class="sim-panel">
+        <div class="sim-controls" aria-label="逗钓仿真控制">
+          <button class="sim-btn active" type="button" data-sim="scout">观察鱼路 <span>鱼在障碍、水草和深浅交界附近巡游，先不要急着压窝。</span></button>
+          <button class="sim-btn" type="button" data-sim="bait">窝前试钓 <span>饵落在窝前约 2 米，降低惊窝风险。</span></button>
+          <button class="sim-btn" type="button" data-sim="tease">提逗触发 <span>用轻提、停顿、拖逗制造“可追逐”的动态信号。</span></button>
+          <button class="sim-btn" type="button" data-sim="strike">中鱼补窝 <span>中鱼后不重打，少量补窝维持鱼群停留。</span></button>
+          <div class="depth-control">
+            <label for="depthRange"><span>水深/视角</span><strong id="depthLabel">中层 1.6m</strong></label>
+            <input id="depthRange" type="range" min="0" max="2" value="1" step="1">
+          </div>
+        </div>
+        <div class="pond-stage" id="pondStage" data-view="underwater" aria-label="3D 谷麦逗钓仿真场景">
+          <div class="pond-world" id="pondWorld">
+            <div class="pond-plane pond-bed"></div>
+            <div class="pond-plane pond-water"></div>
+            <div class="nest" id="simNest" style="left:42%; top:48%;"></div>
+            <div class="reed" style="left:12%; top:17%;"></div>
+            <div class="reed" style="left:80%; top:10%; transform: rotateZ(10deg);"></div>
+            <div class="fish" id="fishA" style="left:22%; top:38%; transform: translateZ(16px) rotateZ(10deg);"></div>
+            <div class="fish" id="fishB" style="left:70%; top:60%; transform: translateZ(22px) rotateZ(192deg) scale(.92);"></div>
+            <div class="fish" id="fishC" style="left:58%; top:30%; transform: translateZ(20px) rotateZ(165deg) scale(.78);"></div>
+            <div class="rod-line" id="rodLine"></div>
+            <div class="bait" id="simBait" style="left:58%; top:42%; transform: translateZ(42px);"></div>
+          </div>
+          <div class="pond-hud" aria-live="polite">
+            <div class="hud-card"><strong>当前动作</strong><p id="simAction">观察水草、障碍和深浅交界。</p></div>
+            <div class="hud-card"><strong>鱼群反馈</strong><p id="simFeedback">鱼在外围巡游，先确认鱼路。</p></div>
+            <div class="hud-card"><strong>操作提醒</strong><p id="simTip">不要把“逗”理解成单一抖竿动作。</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
       <h2>可信检查</h2>
       <p><strong>已验证：</strong>本页保留的是原学习页中的结构化结论和学习框架。</p>
       <p><strong>待确认：</strong>具体鱼情、钓点、水文、季节和地方规则需要按现场条件判断。</p>
       <p><strong>笔记规则：</strong>把通用方法论写进学习笔记，具体操作强度和窝量不绝对化。</p>
     </section>
   </main>
+  <script>
+    const simStates = {
+      scout: {
+        view: "underwater",
+        bait: [58, 42, 42],
+        fish: [[22, 38, 10, 1], [70, 60, 192, .92], [58, 30, 165, .78]],
+        action: "观察水草、障碍和深浅交界。",
+        feedback: "鱼在外围巡游，先确认鱼路。",
+        tip: "不要把“逗”理解成单一抖竿动作。"
+      },
+      bait: {
+        view: "underwater",
+        bait: [47, 55, 34],
+        fish: [[30, 43, 2, 1], [65, 56, 188, .92], [54, 36, 172, .78]],
+        action: "饵落在窝前约 2 米，轻放不压窝。",
+        feedback: "鱼开始向窝区靠近，但仍保持试探。",
+        tip: "先钓窝前，再根据鱼口推进到窝边。"
+      },
+      tease: {
+        view: "underwater",
+        bait: [44, 48, 54],
+        fish: [[38, 46, -8, 1.08], [58, 52, 184, 1], [48, 38, 160, .86]],
+        action: "轻提、慢拖、停顿，让饵变成目标。",
+        feedback: "动态信号提高发现率，鱼会追逐或试口。",
+        tip: "动作强度跟鱼口走，没反馈就降低幅度。"
+      },
+      strike: {
+        view: "strike",
+        bait: [41, 45, 66],
+        fish: [[42, 45, -2, 1.18], [52, 50, 188, 1.02], [47, 40, 170, .92]],
+        action: "中鱼后控线，随后少量补窝。",
+        feedback: "鱼群被留在范围内，后续鱼口更稳定。",
+        tip: "补窝是维护节奏，不是重新重打惊鱼。"
+      }
+    };
+
+    const pondStage = document.getElementById("pondStage");
+    const simBait = document.getElementById("simBait");
+    const fishNodes = [document.getElementById("fishA"), document.getElementById("fishB"), document.getElementById("fishC")];
+    const simAction = document.getElementById("simAction");
+    const simFeedback = document.getElementById("simFeedback");
+    const simTip = document.getElementById("simTip");
+    const depthRange = document.getElementById("depthRange");
+    const depthLabel = document.getElementById("depthLabel");
+    const depthModes = ["浅水 0.8m", "中层 1.6m", "深水 2.4m"];
+
+    function renderSim(key) {
+      const state = simStates[key];
+      pondStage.dataset.view = state.view;
+      simBait.style.left = `${state.bait[0]}%`;
+      simBait.style.top = `${state.bait[1]}%`;
+      simBait.style.transform = `translateZ(${state.bait[2]}px)`;
+      fishNodes.forEach((fish, index) => {
+        const [left, top, angle, scale] = state.fish[index];
+        fish.style.left = `${left}%`;
+        fish.style.top = `${top}%`;
+        fish.style.transform = `translateZ(${16 + index * 4}px) rotateZ(${angle}deg) scale(${scale})`;
+      });
+      simAction.textContent = state.action;
+      simFeedback.textContent = state.feedback;
+      simTip.textContent = state.tip;
+    }
+
+    document.querySelectorAll("[data-sim]").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll("[data-sim]").forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+        renderSim(button.dataset.sim);
+      });
+    });
+
+    depthRange.addEventListener("input", () => {
+      const value = Number(depthRange.value);
+      depthLabel.textContent = depthModes[value];
+      const angle = 54 + value * 5;
+      const lift = 12 - value * 10;
+      document.getElementById("pondWorld").style.transform = `rotateX(${angle}deg) rotateZ(-24deg) translateY(${lift}px)`;
+    });
+  </script>
 </body>
 </html>

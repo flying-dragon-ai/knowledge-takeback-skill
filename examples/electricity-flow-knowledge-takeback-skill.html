@@ -20,6 +20,8 @@
       --orange-soft: #fff6da;
       --red: #b3261e;
       --red-soft: #fce8e6;
+      --purple: #6f42c1;
+      --purple-soft: #f0e9ff;
       --shadow: 0 18px 52px rgba(0, 0, 0, 0.07);
     }
 
@@ -388,6 +390,10 @@
       right: -32px;
     }
 
+    .track.paused .carrier {
+      animation-play-state: paused;
+    }
+
     @keyframes move-right {
       from { transform: translateX(0); }
       to { transform: translateX(calc(100vw + 180px)); }
@@ -422,6 +428,71 @@
       border-color: var(--accent);
     }
 
+    .control-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 0 0 14px;
+    }
+
+    .control-panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: var(--soft);
+      min-width: 0;
+    }
+
+    .control-panel strong {
+      display: block;
+      margin: 0 0 8px;
+      font-size: 13px;
+    }
+
+    .polarity-group,
+    .play-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .polarity-btn,
+    .play-btn {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      padding: 8px 10px;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .polarity-btn.active,
+    .play-btn.active {
+      background: #111827;
+      color: #fff;
+      border-color: #111827;
+    }
+
+    .speed-label {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      align-items: center;
+      width: 100%;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent);
+    }
+
     .detail-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -450,6 +521,220 @@
       margin: 0;
       font-size: 14px;
       line-height: 1.55;
+    }
+
+    .evidence-callout {
+      margin-top: 12px;
+      border: 1px solid rgba(23, 78, 166, 0.28);
+      border-radius: 8px;
+      padding: 13px;
+      background: var(--accent-soft);
+    }
+
+    .evidence-callout strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    .evidence-callout p {
+      margin: 0 0 7px;
+      color: #334155;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .field3d {
+      display: grid;
+      grid-template-columns: minmax(260px, .78fr) minmax(0, 1.22fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .field3d-controls {
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+
+    .field3d-panel {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--soft);
+      padding: 13px;
+    }
+
+    .field3d-panel strong {
+      display: block;
+      margin-bottom: 9px;
+      font-size: 13px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .field3d-choice {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .field3d-btn {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      padding: 8px 10px;
+      color: var(--ink);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    .field3d-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .field3d-panel label {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    .field3d-stage {
+      position: relative;
+      min-height: 390px;
+      border: 1px solid #cfd7e3;
+      border-radius: 16px;
+      overflow: hidden;
+      background: radial-gradient(circle at 50% 18%, #ffffff 0, #eef5ff 38%, #dde6f1 100%);
+      perspective: 1000px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.78), 0 18px 45px rgba(15, 23, 42, .08);
+    }
+
+    .field3d-world {
+      position: absolute;
+      inset: 52px 34px 96px;
+      transform-style: preserve-3d;
+      transform: rotateX(60deg) rotateZ(-31deg);
+      transition: transform 260ms ease;
+    }
+
+    .field3d-stage[data-strength="high"] .field3d-world { transform: rotateX(58deg) rotateZ(-31deg) scale(1.05); }
+    .field3d-stage[data-strength="low"] .field3d-world { transform: rotateX(64deg) rotateZ(-31deg) scale(.96); }
+
+    .field3d-wire {
+      position: absolute;
+      inset: 23% 4% 24%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #ad7d32, #e7c07d 22%, #a96f25 55%, #efd29b);
+      transform: translateZ(0);
+      box-shadow: 0 26px 32px rgba(88, 59, 22, .22), inset 0 18px 24px rgba(255,255,255,.35), inset 0 -18px 28px rgba(86,52,12,.22);
+    }
+
+    .field3d-lattice,
+    .field3d-electron,
+    .field3d-pulse {
+      position: absolute;
+      transform-style: preserve-3d;
+    }
+
+    .field3d-lattice {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: rgba(255, 249, 223, .96);
+      border: 1px solid rgba(117, 82, 27, .25);
+      box-shadow: 0 6px 12px rgba(73, 50, 20, .22);
+    }
+
+    .field3d-electron {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: var(--accent);
+      font-size: 13px;
+      font-weight: 900;
+      box-shadow: 0 10px 20px rgba(23,78,166,.28);
+      animation: field3d-drift var(--drift-speed, 5s) linear infinite;
+      animation-delay: var(--drift-delay, 0s);
+    }
+
+    .field3d-pulse {
+      left: 5%;
+      right: 5%;
+      top: 48%;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, rgba(23,78,166,.72), transparent);
+      transform: translateZ(44px);
+      opacity: .72;
+      animation: field3d-pulse var(--pulse-speed, 2.8s) linear infinite;
+    }
+
+    .field3d-stage[data-strength="low"] .field3d-electron { --drift-speed: 8s; }
+    .field3d-stage[data-strength="high"] .field3d-electron { --drift-speed: 3.4s; }
+    .field3d-stage[data-current="reverse"] .field3d-electron { animation-name: field3d-drift-reverse; }
+    .field3d-stage[data-current="reverse"] .field3d-pulse { animation-name: field3d-pulse-reverse; }
+
+    @keyframes field3d-drift {
+      from { transform: translateX(18px) translateZ(34px); }
+      to { transform: translateX(290px) translateZ(34px); }
+    }
+
+    @keyframes field3d-drift-reverse {
+      from { transform: translateX(290px) translateZ(34px); }
+      to { transform: translateX(18px) translateZ(34px); }
+    }
+
+    @keyframes field3d-pulse {
+      from { clip-path: inset(0 96% 0 0); }
+      to { clip-path: inset(0 0 0 96%); }
+    }
+
+    @keyframes field3d-pulse-reverse {
+      from { clip-path: inset(0 0 0 96%); }
+      to { clip-path: inset(0 96% 0 0); }
+    }
+
+    .field3d-hud {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 14px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .field3d-card {
+      border: 1px solid rgba(23,78,166,.18);
+      border-radius: 10px;
+      background: rgba(255,255,255,.86);
+      padding: 10px;
+      backdrop-filter: blur(8px);
+    }
+
+    .field3d-card span {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .field3d-card p {
+      margin: 0;
+      color: #334155;
+      font-size: 13px;
+      line-height: 1.45;
     }
 
     .calc-grid {
@@ -510,9 +795,51 @@
       line-height: 1.65;
     }
 
+    .calc-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .metric {
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .metric span {
+      display: block;
+      color: rgba(255, 255, 255, 0.62);
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
     .quiz {
       display: grid;
       gap: 14px;
+    }
+
+    .score-chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid rgba(31, 111, 67, 0.35);
+      border-radius: 999px;
+      background: var(--green-soft);
+      color: #155a33;
+      padding: 7px 10px;
+      font-size: 13px;
+      font-weight: 850;
+      white-space: nowrap;
     }
 
     .question {
@@ -573,6 +900,56 @@
       line-height: 1.7;
     }
 
+    textarea {
+      width: 100%;
+      min-height: 120px;
+      resize: vertical;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      font: inherit;
+      line-height: 1.65;
+      color: var(--ink);
+      background: #fff;
+    }
+
+    .note-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 12px 0;
+    }
+
+    .note-btn {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      padding: 9px 12px;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    .note-btn.primary {
+      background: #111827;
+      color: #fff;
+      border-color: #111827;
+    }
+
+    .note-output {
+      white-space: pre-wrap;
+      margin: 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfbfa;
+      padding: 14px;
+      color: #303236;
+      font-size: 14px;
+      line-height: 1.65;
+      overflow: auto;
+    }
+
     .note-gap {
       height: 12px;
     }
@@ -608,11 +985,15 @@
 
       .hero,
       .lab,
+      .field3d,
+      .control-row,
       .check-grid,
       .note-grid,
       .source-grid,
       .calc-grid,
-      .detail-grid {
+      .calc-metrics,
+      .detail-grid,
+      .field3d-hud {
         grid-template-columns: 1fr;
       }
 
@@ -659,7 +1040,7 @@
           <div class="step">02 验证</div>
           <div>
             <h2>证据来源</h2>
-            <p>用 OpenStax、LibreTexts、DOE/NASA 等教育或机构资料做依据，来源列在页面底部。</p>
+            <p>用 OpenStax、DOE/NASA 等教育或机构资料做依据，来源列在页面底部，并在交互区随材料切换。</p>
           </div>
         </div>
         <div class="stream-card">
@@ -699,6 +1080,50 @@
     <section class="section">
       <div class="section-head">
         <div>
+          <p class="eyebrow">3D FIELD SIMULATOR</p>
+          <h2 class="section-title">3D 金属导线微观仿真</h2>
+        </div>
+        <div class="section-note">区分电子漂移和电场建立</div>
+      </div>
+      <div class="field3d">
+        <div class="field3d-controls">
+          <div class="field3d-panel">
+            <strong>电流强度</strong>
+            <div class="field3d-choice" aria-label="电流强度选择">
+              <button class="field3d-btn active" type="button" data-current3d="low">低电流</button>
+              <button class="field3d-btn" type="button" data-current3d="medium">中电流</button>
+              <button class="field3d-btn" type="button" data-current3d="high">高电流</button>
+            </div>
+          </div>
+          <div class="field3d-panel">
+            <strong>电池极性</strong>
+            <div class="field3d-choice" aria-label="极性选择">
+              <button class="field3d-btn active" type="button" data-polarity3d="normal">电子左 → 右</button>
+              <button class="field3d-btn" type="button" data-polarity3d="reverse">电子右 → 左</button>
+            </div>
+          </div>
+          <div class="field3d-panel">
+            <label for="field3dZoom"><span>观察倍率</span><strong id="field3dZoomLabel">1.0×</strong></label>
+            <input id="field3dZoom" type="range" min="0.8" max="1.25" step="0.05" value="1">
+          </div>
+        </div>
+        <div class="field3d-stage" id="field3dStage" data-current="low" aria-label="3D 金属导线微观模型">
+          <div class="field3d-world" id="field3dWorld">
+            <div class="field3d-wire"></div>
+            <div class="field3d-pulse"></div>
+          </div>
+          <div class="field3d-hud" aria-live="polite">
+            <div class="field3d-card"><span>电子漂移</span><p id="field3dDrift">慢速漂移，动画放大了微观运动。</p></div>
+            <div class="field3d-card"><span>电场信号</span><p id="field3dPulse">电场建立很快，不等于单个电子快速跑完全程。</p></div>
+            <div class="field3d-card"><span>记忆钩子</span><p id="field3dMemory">金属中“流动者”主要是自由电子。</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
           <p class="eyebrow">INTERACTIVE LAB</p>
           <h2 class="section-title">载流子交互切换</h2>
         </div>
@@ -727,6 +1152,27 @@
             <button class="direction-btn" data-direction="carrier" type="button">真实载流子方向</button>
           </div>
 
+          <div class="control-row" aria-label="动画控制">
+            <div class="control-panel">
+              <strong>外加方向</strong>
+              <div class="polarity-group">
+                <button class="polarity-btn active" data-polarity="normal" type="button">左 → 右</button>
+                <button class="polarity-btn" data-polarity="reversed" type="button">右 → 左</button>
+              </div>
+            </div>
+            <div class="control-panel">
+              <strong>动画</strong>
+              <div class="play-group">
+                <button class="play-btn active" id="play-toggle" type="button" aria-pressed="false">暂停</button>
+              </div>
+              <label class="speed-label" for="speed-input">
+                <span>速度倍率</span>
+                <span id="speed-value">1.0×</span>
+              </label>
+              <input id="speed-input" type="range" min="0.5" max="2" step="0.1" value="1">
+            </div>
+          </div>
+
           <div class="track-wrap">
             <div class="track-head">
               <span id="left-label">正极侧 / 高电势</span>
@@ -749,6 +1195,12 @@
               <span>一句话</span>
               <p id="memory-detail">金属里不是整根线在流，是自由电子在做很慢的定向漂移。</p>
             </div>
+          </div>
+
+          <div class="evidence-callout">
+            <strong>当前证据锚点</strong>
+            <p id="evidence-detail">OpenStax 用于电流定义、金属中电子流和常规电流方向说明。</p>
+            <a id="evidence-link" href="https://openstax.org/books/university-physics-volume-2/pages/9-1-electrical-current" target="_blank" rel="noreferrer">打开对应来源</a>
           </div>
         </div>
       </div>
@@ -784,6 +1236,20 @@
             <div class="value" id="drift-value">0.0000936 m/s</div>
             <p id="drift-extra">约 0.0936 mm/s，约 33.7 cm/hour。</p>
           </div>
+          <div class="calc-metrics" aria-label="计算细节">
+            <div class="metric">
+              <span>横截面积</span>
+              <strong id="area-value">7.85e-7 m²</strong>
+            </div>
+            <div class="metric">
+              <span>每秒电荷数</span>
+              <strong id="charge-rate-value">6.24e18 e/s</strong>
+            </div>
+            <div class="metric">
+              <span>漂移 1 cm</span>
+              <strong id="one-cm-time">约 107 s</strong>
+            </div>
+          </div>
           <p>解释：电灯几乎立刻亮，不是因为某个电子从开关一路飞到灯泡，而是因为电场在电路中建立得很快。</p>
         </div>
       </div>
@@ -795,7 +1261,7 @@
           <p class="eyebrow">MINI QUIZ</p>
           <h2 class="section-title">小测：你真的分清了吗？</h2>
         </div>
-        <div class="section-note">点击选项即时反馈</div>
+        <div class="section-note"><span class="score-chip" id="quiz-score">已答 0/4 · 正确 0</span></div>
       </div>
       <div class="quiz">
         <div class="question" data-answer="电子">
@@ -874,6 +1340,26 @@
       </div>
       <div class="note-gap" aria-hidden="true"></div>
       <div class="mini">最短记忆版：电流不是“电这种东西”在流，而是电荷在流；金属里多是电子，电解液里是离子，半导体里是电子和空穴，等离子体里是电子和离子。</div>
+      <div class="note-gap" aria-hidden="true"></div>
+      <div class="note-grid">
+        <div class="note-card">
+          <h3>我的一句话</h3>
+          <textarea id="personal-note" placeholder="用自己的话写：我现在怎么判断一个材料里的电流是谁在流？"></textarea>
+        </div>
+        <div class="note-card">
+          <h3>笔记操作</h3>
+          <p class="muted">生成一份可复制的 Markdown 笔记，包含证据来源、判断流程和你的个人总结。内容会临时保存在本浏览器。</p>
+          <div class="note-actions">
+            <button class="note-btn primary" id="generate-note" type="button">生成笔记</button>
+            <button class="note-btn" id="copy-note" type="button">复制笔记</button>
+          </div>
+          <p class="feedback" id="note-feedback"></p>
+        </div>
+        <div class="note-card">
+          <h3>生成结果</h3>
+          <pre class="note-output" id="note-output">点击“生成笔记”后，这里会出现可保存的学习笔记。</pre>
+        </div>
+      </div>
     </section>
 
     <section class="section">
@@ -894,8 +1380,8 @@
           <p>用于漂移速度和 v = I / (n q A) 计算关系。<br><a href="https://openstax.org/books/university-physics-volume-2/pages/9-2-model-of-conduction-in-metals" target="_blank" rel="noreferrer">查看来源</a></p>
         </div>
         <div class="source-card">
-          <strong>LibreTexts/OpenStax · Electrolytes</strong>
-          <p>用于电解液通过溶液中的离子导电这一点。<br><a href="https://chem.libretexts.org/Bookshelves/General_Chemistry/Chemistry_-_Atoms_First_2e_%28OpenStax%29/11%3A_Solutions_and_Colloids/11.03%3A_Electrolytes" target="_blank" rel="noreferrer">查看来源</a></p>
+          <strong>OpenStax Chemistry 2e · Electrolytes</strong>
+          <p>用于电解液通过溶液中的离子导电这一点。<br><a href="https://openstax.org/books/chemistry-2e/pages/11-2-electrolytes" target="_blank" rel="noreferrer">查看来源</a></p>
         </div>
         <div class="source-card">
           <strong>OpenStax · Semiconductors and Doping</strong>
@@ -907,7 +1393,7 @@
         </div>
         <div class="source-card">
           <strong>NASA Science · Plasma</strong>
-          <p>用于离子化、电子与离子独立运动的背景说明。<br><a href="https://science.nasa.gov/learn/heat/big-ideas/big-idea-1-2/" target="_blank" rel="noreferrer">查看来源</a></p>
+          <p>用于离子化、电子与离子等带电粒子背景说明。<br><a href="https://science.nasa.gov/learn/heat/big-ideas/big-idea-3-1/" target="_blank" rel="noreferrer">查看来源</a></p>
         </div>
       </div>
     </section>
@@ -920,6 +1406,75 @@
       { type: "current", label: "I", direction: "normal", y: "70%", duration: "5.0s" }
     ];
 
+    const field3dStage = document.getElementById("field3dStage");
+    const field3dWorld = document.getElementById("field3dWorld");
+    const field3dDrift = document.getElementById("field3dDrift");
+    const field3dPulse = document.getElementById("field3dPulse");
+    const field3dMemory = document.getElementById("field3dMemory");
+    const field3dZoom = document.getElementById("field3dZoom");
+    const field3dZoomLabel = document.getElementById("field3dZoomLabel");
+    const field3dCopy = {
+      low: ["慢速漂移，平均速度很小。", "低电流代表单位时间通过截面的电荷较少。", "电灯快亮主要来自电场建立，而非单个电子跑完全程。"],
+      medium: ["漂移增强，但仍是集体平均运动。", "电流变大意味着通过率变大，不等于每个电子高速飞行。", "把电流理解成通过率，比理解成速度更稳。"],
+      high: ["更多电荷在同一时间通过截面。", "动画加快只是帮助观察，真实漂移速度通常仍很慢。", "I = Q / t：看截面通过量，而不是看一个粒子跑多快。"]
+    };
+
+    for (let row = 0; row < 3; row += 1) {
+      for (let col = 0; col < 7; col += 1) {
+        const ion = document.createElement("span");
+        ion.className = "field3d-lattice";
+        ion.style.left = `${8 + col * 14}%`;
+        ion.style.top = `${30 + row * 18}%`;
+        ion.style.transform = `translateZ(${row * 4}px)`;
+        field3dWorld.appendChild(ion);
+      }
+    }
+
+    for (let i = 0; i < 7; i += 1) {
+      const electron = document.createElement("span");
+      electron.className = "field3d-electron";
+      electron.textContent = "−";
+      electron.style.left = `${4 + i * 12}%`;
+      electron.style.top = `${35 + (i % 3) * 13}%`;
+      electron.style.setProperty("--drift-delay", `${-i * .72}s`);
+      field3dWorld.appendChild(electron);
+    }
+
+    function setField3dCurrent(mode) {
+      const reverse = field3dStage.dataset.current === "reverse";
+      field3dStage.dataset.current = reverse ? "reverse" : mode;
+      field3dStage.dataset.strength = mode;
+      const copy = field3dCopy[mode];
+      field3dDrift.textContent = copy[0];
+      field3dPulse.textContent = copy[1];
+      field3dMemory.textContent = copy[2];
+    }
+
+    document.querySelectorAll("[data-current3d]").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll("[data-current3d]").forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+        setField3dCurrent(button.dataset.current3d);
+      });
+    });
+
+    document.querySelectorAll("[data-polarity3d]").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll("[data-polarity3d]").forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+        if (button.dataset.polarity3d === "reverse") field3dStage.dataset.current = "reverse";
+        else field3dStage.dataset.current = field3dStage.dataset.strength || "low";
+      });
+    });
+
+    field3dZoom.addEventListener("input", () => {
+      const zoom = Number(field3dZoom.value);
+      field3dZoomLabel.textContent = `${zoom.toFixed(2)}×`;
+      field3dWorld.style.transform = `rotateX(60deg) rotateZ(-31deg) scale(${zoom})`;
+    });
+
+    field3dStage.dataset.strength = "low";
+
     const MATERIALS = {
       metal: {
         title: "金属导线",
@@ -930,11 +1485,15 @@
           { type: "electron", label: "−", direction: "reverse", y: "52%", duration: "5.6s" },
           { type: "electron", label: "−", direction: "reverse", y: "68%", duration: "5.1s" }
         ],
-        conventional: "常规电流：左 → 右",
-        carrierLabel: "电子漂移：右 → 左",
+        conventional: "常规电流：{arrow}",
+        carrierLabel: "电子漂移：{oppositeArrow}",
         carrierDetail: "自由电子。",
         directionDetail: "电子带负电，所以真实电子漂移方向通常与常规电流方向相反。",
-        memory: "金属里不是整根线在流，是自由电子在做很慢的定向漂移。"
+        memory: "金属里不是整根线在流，是自由电子在做很慢的定向漂移。",
+        evidence: {
+          text: "OpenStax 用于电流定义、金属中电子流和常规电流方向说明；金属漂移速度公式来自 OpenStax 金属导电模型。",
+          url: "https://openstax.org/books/university-physics-volume-2/pages/9-1-electrical-current"
+        }
       },
       electrolyte: {
         title: "电解液",
@@ -945,11 +1504,15 @@
           { type: "ion-minus", label: "−", direction: "reverse", y: "53%", duration: "6.2s" },
           { type: "ion-plus", label: "+", direction: "normal", y: "70%", duration: "5.8s" }
         ],
-        conventional: "正离子贡献：左 → 右",
-        carrierLabel: "正负离子：相向/反向迁移",
+        conventional: "正离子贡献：{arrow}",
+        carrierLabel: "正离子 {arrow}，负离子 {oppositeArrow}",
         carrierDetail: "正离子和负离子。",
         directionDetail: "正离子朝常规电流方向迁移，负离子朝相反方向迁移；两者都能贡献电流。",
-        memory: "电解液导电的关键词不是电子穿水，而是溶液里有可移动的离子。"
+        memory: "电解液导电的关键词不是电子穿水，而是溶液里有可移动的离子。",
+        evidence: {
+          text: "OpenStax Chemistry 说明电解质溶解后形成离子，溶液中可移动离子让电解液导电。",
+          url: "https://openstax.org/books/chemistry-2e/pages/11-2-electrolytes"
+        }
       },
       semiconductor: {
         title: "半导体",
@@ -960,11 +1523,15 @@
           { type: "hole", label: "+", direction: "normal", y: "55%", duration: "6.0s" },
           { type: "hole", label: "+", direction: "normal", y: "72%", duration: "6.5s" }
         ],
-        conventional: "空穴方向：左 → 右",
-        carrierLabel: "电子反向，空穴同向",
+        conventional: "空穴方向：{arrow}",
+        carrierLabel: "空穴 {arrow}，电子 {oppositeArrow}",
         carrierDetail: "电子和空穴。",
         directionDetail: "空穴表现为正电载流子，方向与常规电流相同；电子仍通常相反。",
-        memory: "半导体要把“电子移动”和“空穴像正电一样移动”一起看。"
+        memory: "半导体要把“电子移动”和“空穴像正电一样移动”一起看。",
+        evidence: {
+          text: "OpenStax 半导体章节用于电子、空穴、n 型和 p 型多数载流子的解释。",
+          url: "https://openstax.org/books/university-physics-volume-3/pages/9-6-semiconductors-and-doping"
+        }
       },
       plasma: {
         title: "等离子体",
@@ -975,46 +1542,92 @@
           { type: "ion-plus", label: "+", direction: "normal", y: "49%", duration: "5.8s" },
           { type: "electron", label: "−", direction: "reverse", y: "70%", duration: "4.9s" }
         ],
-        conventional: "离子贡献：左 → 右",
-        carrierLabel: "电子与离子：方向相反",
+        conventional: "离子贡献：{arrow}",
+        carrierLabel: "离子 {arrow}，电子 {oppositeArrow}",
         carrierDetail: "电子和离子。",
         directionDetail: "正离子按常规电流方向贡献，电子通常反向贡献；真实等离子体还会受磁场约束。",
-        memory: "等离子体不是普通气体，而是含有自由电子和离子的导电气体。"
+        memory: "等离子体不是普通气体，而是含有自由电子和离子的导电气体。",
+        evidence: {
+          text: "DOE 和 NASA 的等离子体资料用于说明等离子体含自由电子、离子等带电粒子，因而受电磁场影响并可导电。",
+          url: "https://www.energy.gov/science/doe-explainsplasma"
+        }
       }
     };
 
     let activeMaterial = "metal";
     let activeDirection = "conventional";
+    let activePolarity = "normal";
+    let isPaused = false;
+    let speedMultiplier = 1;
 
     const track = document.getElementById("carrier-track");
     const title = document.getElementById("material-title");
     const summary = document.getElementById("material-summary");
     const pill = document.getElementById("material-pill");
+    const leftLabel = document.getElementById("left-label");
+    const rightLabel = document.getElementById("right-label");
     const directionLabel = document.getElementById("direction-label");
     const carrierDetail = document.getElementById("carrier-detail");
     const directionDetail = document.getElementById("direction-detail");
     const memoryDetail = document.getElementById("memory-detail");
+    const evidenceDetail = document.getElementById("evidence-detail");
+    const evidenceLink = document.getElementById("evidence-link");
+    const playToggle = document.getElementById("play-toggle");
+    const speedInput = document.getElementById("speed-input");
+    const speedValue = document.getElementById("speed-value");
+
+    function arrowText(direction) {
+      return direction === "normal" ? "左 → 右" : "右 → 左";
+    }
+
+    function oppositeDirection(direction) {
+      return direction === "normal" ? "reverse" : "normal";
+    }
+
+    function formatDirection(template) {
+      const baseDirection = activePolarity === "normal" ? "normal" : "reverse";
+      return template
+        .replace("{arrow}", arrowText(baseDirection))
+        .replace("{oppositeArrow}", arrowText(oppositeDirection(baseDirection)));
+    }
+
+    function effectiveDirection(carrierDirection) {
+      if (activePolarity === "normal") return carrierDirection;
+      return oppositeDirection(carrierDirection);
+    }
+
+    function scaledDuration(duration) {
+      const seconds = Number.parseFloat(String(duration).replace("s", ""));
+      if (!Number.isFinite(seconds) || seconds <= 0) return "5s";
+      return `${seconds / speedMultiplier}s`;
+    }
 
     function renderMaterial() {
       const data = MATERIALS[activeMaterial];
       title.textContent = data.title;
       summary.textContent = data.summary;
       pill.textContent = data.pill;
-      directionLabel.textContent = activeDirection === "conventional" ? data.conventional : data.carrierLabel;
+      leftLabel.textContent = activePolarity === "normal" ? "正极侧 / 高电势" : "负极侧 / 低电势";
+      rightLabel.textContent = activePolarity === "normal" ? "负极侧 / 低电势" : "正极侧 / 高电势";
+      directionLabel.textContent = activeDirection === "conventional"
+        ? formatDirection(data.conventional)
+        : formatDirection(data.carrierLabel);
       carrierDetail.textContent = data.carrierDetail;
       directionDetail.textContent = data.directionDetail;
       memoryDetail.textContent = data.memory;
+      evidenceDetail.textContent = data.evidence.text;
+      evidenceLink.href = data.evidence.url;
 
       track.innerHTML = "";
+      track.classList.toggle("paused", isPaused);
       const particles = activeDirection === "conventional" ? CURRENT_MARKERS : data.carriers;
       particles.forEach((carrier, index) => {
         const dot = document.createElement("span");
         dot.className = `carrier ${carrier.type}`;
-        const shouldReverse = activeDirection === "carrier" && carrier.direction === "reverse";
-        if (shouldReverse) dot.classList.add("reverse");
+        if (effectiveDirection(carrier.direction) === "reverse") dot.classList.add("reverse");
         dot.textContent = carrier.label;
         dot.style.setProperty("--y", carrier.y);
-        dot.style.setProperty("--duration", carrier.duration);
+        dot.style.setProperty("--duration", scaledDuration(carrier.duration));
         dot.style.setProperty("--delay", `${index * -1.45}s`);
         track.appendChild(dot);
       });
@@ -1038,12 +1651,38 @@
       });
     });
 
+    document.querySelectorAll(".polarity-btn").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".polarity-btn").forEach((b) => b.classList.remove("active"));
+        button.classList.add("active");
+        activePolarity = button.dataset.polarity;
+        renderMaterial();
+      });
+    });
+
+    playToggle.addEventListener("click", () => {
+      isPaused = !isPaused;
+      playToggle.textContent = isPaused ? "继续" : "暂停";
+      playToggle.classList.toggle("active", !isPaused);
+      playToggle.setAttribute("aria-pressed", String(isPaused));
+      renderMaterial();
+    });
+
+    speedInput.addEventListener("input", () => {
+      speedMultiplier = Number(speedInput.value);
+      speedValue.textContent = `${speedMultiplier.toFixed(1)}×`;
+      renderMaterial();
+    });
+
     const q = 1.602176634e-19;
     const currentInput = document.getElementById("current-input");
     const diameterInput = document.getElementById("diameter-input");
     const densityInput = document.getElementById("density-input");
     const driftValue = document.getElementById("drift-value");
     const driftExtra = document.getElementById("drift-extra");
+    const areaValue = document.getElementById("area-value");
+    const chargeRateValue = document.getElementById("charge-rate-value");
+    const oneCmTime = document.getElementById("one-cm-time");
 
     function fmt(num, digits = 3) {
       if (!Number.isFinite(num)) return "无法计算";
@@ -1058,15 +1697,37 @@
       const radiusM = (dMm / 1000) / 2;
       const area = Math.PI * radiusM * radiusM;
       const v = I / (n * q * area);
+      if (!Number.isFinite(v) || v < 0 || !Number.isFinite(area) || area <= 0) {
+        driftValue.textContent = "无法计算";
+        driftExtra.textContent = "请确认电流、导线直径和载流子数密度都是正数。";
+        areaValue.textContent = "无法计算";
+        chargeRateValue.textContent = "无法计算";
+        oneCmTime.textContent = "无法计算";
+        return;
+      }
       const mmPerS = v * 1000;
       const cmPerHour = v * 100 * 3600;
+      const electronsPerSecond = I / q;
+      const secondsPerCm = v > 0 ? 0.01 / v : Infinity;
       driftValue.textContent = `${fmt(v, 3)} m/s`;
       driftExtra.textContent = `约 ${fmt(mmPerS, 3)} mm/s，约 ${fmt(cmPerHour, 3)} cm/hour。`;
+      areaValue.textContent = `${fmt(area, 3)} m²`;
+      chargeRateValue.textContent = `${fmt(electronsPerSecond, 3)} e/s`;
+      oneCmTime.textContent = Number.isFinite(secondsPerCm) ? `约 ${fmt(secondsPerCm, 3)} s` : "无限长";
     }
 
     [currentInput, diameterInput, densityInput].forEach((input) => {
       input.addEventListener("input", updateCalculator);
     });
+
+    const quizScore = document.getElementById("quiz-score");
+
+    function updateQuizScore() {
+      const questions = Array.from(document.querySelectorAll(".question"));
+      const answered = questions.filter((question) => question.dataset.answered === "true").length;
+      const correct = questions.filter((question) => question.dataset.correct === "true").length;
+      quizScore.textContent = `已答 ${answered}/${questions.length} · 正确 ${correct}`;
+    }
 
     document.querySelectorAll(".question").forEach((question) => {
       const answer = question.dataset.answer;
@@ -1076,17 +1737,85 @@
           question.querySelectorAll(".option").forEach((o) => o.classList.remove("correct", "wrong"));
           if (option.textContent.trim() === answer) {
             option.classList.add("correct");
+            question.dataset.answered = "true";
+            question.dataset.correct = "true";
             feedback.textContent = "对。这个点可以进入学习笔记。";
           } else {
             option.classList.add("wrong");
+            question.dataset.answered = "true";
+            question.dataset.correct = "false";
             feedback.textContent = `不对。正确答案是：${answer}。`;
           }
+          updateQuizScore();
         });
       });
     });
 
+    const personalNote = document.getElementById("personal-note");
+    const generateNote = document.getElementById("generate-note");
+    const copyNote = document.getElementById("copy-note");
+    const noteOutput = document.getElementById("note-output");
+    const noteFeedback = document.getElementById("note-feedback");
+    const noteStorageKey = "electricity-flow-personal-note";
+
+    personalNote.value = localStorage.getItem(noteStorageKey) || "";
+    personalNote.addEventListener("input", () => {
+      localStorage.setItem(noteStorageKey, personalNote.value);
+    });
+
+    function buildLearningNote() {
+      const today = new Date().toISOString().slice(0, 10);
+      const personal = personalNote.value.trim() || "还没有填写我的一句话。";
+      return `# 电流载流子学习笔记
+
+日期：${today}
+
+## 核心结论
+- 电流是电荷的定向移动，不是“电这种物质”在流。
+- 金属：主要是自由电子漂移。
+- 电解液：主要是正离子和负离子迁移。
+- 半导体：电子和空穴都可作为载流子，掺杂会改变多数载流子。
+- 等离子体：自由电子和离子共同构成可移动带电粒子。
+
+## 判断流程
+1. 先问介质：金属、电解液、半导体、等离子体，还是别的材料？
+2. 再问哪些带电粒子可以长期移动。
+3. 最后分开看常规电流方向和真实载流子方向。
+
+## 计算提醒
+金属单一电子载流子的近似公式：v = I / (n q A)。它算的是电子平均漂移速度，不是信号传播速度。
+
+## 我的总结
+${personal}
+
+## 证据来源
+- OpenStax Electrical Current
+- OpenStax Model of Conduction in Metals
+- OpenStax Chemistry 2e Electrolytes
+- OpenStax Semiconductors and Doping
+- DOE / NASA Plasma`;
+    }
+
+    generateNote.addEventListener("click", () => {
+      noteOutput.textContent = buildLearningNote();
+      noteFeedback.textContent = "已生成学习笔记。";
+    });
+
+    copyNote.addEventListener("click", async () => {
+      if (noteOutput.textContent.startsWith("点击")) {
+        noteOutput.textContent = buildLearningNote();
+      }
+      try {
+        await navigator.clipboard.writeText(noteOutput.textContent);
+        noteFeedback.textContent = "已复制到剪贴板。";
+      } catch {
+        noteFeedback.textContent = "浏览器未允许自动复制，可以手动选中生成结果。";
+      }
+    });
+
     renderMaterial();
     updateCalculator();
+    updateQuizScore();
   </script>
 </body>
 </html>
